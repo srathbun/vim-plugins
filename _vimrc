@@ -266,3 +266,6 @@ let g:proj_run_fold3='!fossil commit'
 
 " compiler commands
 autocmd BufNewFile,BufRead *.psl compiler psl
+" highlight long lines
+"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+"match OverLength /\%160v.\+/
