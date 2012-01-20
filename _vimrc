@@ -78,8 +78,14 @@ syntax on
 autocmd BufRead,BufNewFile *.psl setfiletype psl
 autocmd BufRead,BufNewFile *.plb setfiletype psl
 "autocmd BufRead,BufNewFile *.let setfiletype let
-autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
-autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+" use py compile to 'make' python code, for syntax checking with quickfix buf
+" autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
+" autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+" Deprecated in favor of pylint
+" autocmd BufRead *.py set makeprg=pylint\ -i\ y\ --rcfile=pylint.rc\ %
+" autocmd BufRead *.py set efm=%+P[%f],%t%n:\ %#%l:%m,%Z,%+IYour\ code%m,%Z,%-G%.%#
+" Deprecated in favor of python mode plugin
+" use psl as 'make' program, recognizing error output for quickfix buffer
 autocmd BufRead *.psl set makeprg=runtime\ %:t:r.pjb\ -u
 autocmd BufRead *.psl set errorformat=%.%#\<%f\ -\ %l\\,%c\>%m,\<psl\>\ :\ Runtime\ error:\ in\ \"%f\"\ line\ %l\ %m
 
@@ -269,3 +275,10 @@ autocmd BufNewFile,BufRead *.psl compiler psl
 " highlight long lines
 "highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 "match OverLength /\%160v.\+/
+
+" Set up pythom mode settings
+let g:pymode_lint_config = 'pylint.rc'
+let g:pymode_options_indent = 0
+let g:pymode_options_other = 0
+let g:pymode_options_fold = 0
+let g:pymode_rope_guess_project = 0
