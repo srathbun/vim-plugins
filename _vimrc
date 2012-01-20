@@ -276,9 +276,14 @@ autocmd BufNewFile,BufRead *.psl compiler psl
 "highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 "match OverLength /\%160v.\+/
 
-" Set up pythom mode settings
+" Set up python mode settings
 let g:pymode_lint_config = 'pylint.rc'
 let g:pymode_options_indent = 0
 let g:pymode_options_other = 0
 let g:pymode_options_fold = 0
 let g:pymode_rope_guess_project = 0
+let g:pydoc = 'c:/Python27/lib/pydoc.py'
+
+" Alternate python syntax highlighting options
+highlight InheritUnderlined ctermfg=118 cterm=underline guifg=#1FF07A gui=underline
+let python_highlight_all = 1
