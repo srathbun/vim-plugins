@@ -71,7 +71,7 @@ set hlsearch
 set ea
 
 " turn on persistent undo
-set undodir=C:\\Program\ Files\ (x86)\\Vim\\undoFiles
+set undodir=C:\\Vim\\undoFiles
 set undofile 
 " turn on syntax highlighting
 syntax on
@@ -195,7 +195,7 @@ set completeopt=longest,menuone
 "buffer
 set autochdir
 " set the viminfo settings
-set viminfo='50,<1000,s100,:100,h,/100,@100,!,%,nC:/Program\ Files\ (x86)/vim/viminfo 
+set viminfo='50,<1000,s100,:100,h,/100,@100,!,%,nC:/vim/viminfo 
 
 
 " Function to disable the match paren plugin for remote file editing
