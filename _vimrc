@@ -72,7 +72,9 @@ set ea
 
 " turn on persistent undo
 set undodir=C:\\Program\ Files\ (x86)\\Vim\\undoFiles
-"set undofile 
+set undofile 
+" have backup files and swap files saved to a temp folder
+set backupdir=C:\\temp\\vimtmp
 " turn on syntax highlighting
 syntax on
 autocmd BufRead,BufNewFile *.psl setfiletype psl
