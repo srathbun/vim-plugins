@@ -72,7 +72,7 @@ set ea
 
 " turn on persistent undo
 set undodir=C:\\Program\ Files\ (x86)\\Vim\\undoFiles
-set undofile 
+"set undofile 
 " turn on syntax highlighting
 syntax on
 autocmd BufRead,BufNewFile *.psl setfiletype psl
@@ -277,7 +277,8 @@ autocmd BufNewFile,BufRead *.psl compiler psl
 "match OverLength /\%160v.\+/
 
 " Set up python mode settings
-let g:pymode_lint_config = 'pylint.rc'
+let g:pymode_lint_checker = 'pyflakes'
+let g:pymode_lint_config = 'c:/Program Files (x86)/vim/pylint.rc'
 let g:pymode_options_indent = 0
 let g:pymode_options_other = 0
 let g:pymode_options_fold = 0
