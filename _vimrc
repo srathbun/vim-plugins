@@ -82,12 +82,22 @@ autocmd BufRead,BufNewFile *.plb setfiletype psl
 " autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
 " autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 " Deprecated in favor of pylint
-" autocmd BufRead *.py set makeprg=pylint\ -i\ y\ --rcfile=pylint.rc\ %
-" autocmd BufRead *.py set efm=%+P[%f],%t%n:\ %#%l:%m,%Z,%+IYour\ code%m,%Z,%-G%.%#
-" Deprecated in favor of python mode plugin
+autocmd BufRead *.py set makeprg=pylint\ --reports=n\ --rcfile=pylint.rc\ --output-format=parseable\ \"%:p\"
+autocmd BufRead *.py set efm=%A%f:%l:\ [%t%.%#]\ %m,%Z%p^^,%-C%.%#
+"autocmd BufRead *.py set efm=%+P[%f],%t%n:\ %#%l:%m,%Z,%+IYour\ code%m,%Z,%-G%.%#
 " use psl as 'make' program, recognizing error output for quickfix buffer
 autocmd BufRead *.psl set makeprg=runtime\ %:t:r.pjb\ -u
 autocmd BufRead *.psl set errorformat=%.%#\<%f\ -\ %l\\,%c\>%m,\<psl\>\ :\ Runtime\ error:\ in\ \"%f\"\ line\ %l\ %m
+" Automatically open, but do not go to (if there are errors) the quickfix /
+" location list window, or close it when is has become empty.
+"
+" Note: Must allow nesting of autocmds to enable any customizations for quickfix
+" buffers.
+" Note: Normally, :cwindow jumps to the quickfix window if the command opens it
+" (but not if it's already open). However, as part of the autocmd, this doesn't
+" seem to happen.
+autocmd QuickFixCmdPost [^l]* nested cwindow
+
 
 " turn on line numbers
 set nu
@@ -187,15 +197,6 @@ set completeopt=longest,menuone
 "inoremap <expr> <M-,> pumvisible() ? '<C-n>' :\ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 " keep menu item always highlighted by simulating <Up> on pu visible
 "inoremap <expr> <C-p> pumvisible() ? '<C-p>' :	\ '<C-p><C-r>=pumvisible() ? "\<lt>Up>" : ""<CR>'
-
-" mini buf explorer setup
-"let g:miniBufExplMapWindowNavVim = 1
-"let g:miniBufExplMapWindowNavArrows = 1
-"let g:miniBufExplMapCTabSwitchBufs = 1
-"let g:miniBufExplModSelTarget = 1
-"let g:miniBufExplSplitBelow=0
-"let g:miniBufExplorerDebugLevel = 0
-"let g:miniBufExplorerDebugMode = 0
 
 "set vim to automatically change to the directory of the file in the current
 "buffer
