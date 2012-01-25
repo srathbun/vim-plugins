@@ -107,6 +107,7 @@ set backspace=indent,eol,start
 "colorscheme darkblue
 colorscheme zenburn
 set guifont=Consolas:h11:cANSI
+set t_Co=256
 set background=dark
 
 " turn on autoindent
@@ -290,4 +291,6 @@ let g:pydoc = 'c:/Python27/lib/pydoc.py'
 
 " Alternate python syntax highlighting options
 highlight InheritUnderlined ctermfg=118 cterm=underline guifg=#1FF07A gui=underline
+highlight Operator          ctermfg=186 cterm=none guifg=#c9c484 gui=none 
+highlight pythonBuiltin     ctermfg=88 cterm=none guifg=#d1a243 gui=none 
 let python_highlight_all = 1
