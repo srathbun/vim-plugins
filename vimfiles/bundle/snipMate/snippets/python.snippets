@@ -141,3 +141,9 @@ snippet autoviv
 				return value
 snippet viv
 	${1} = AutoVivification()
+# sqlalchemy table clasee
+snippet table
+	class ${1:newtable}(Base):
+		__tablename__ = '$1'
+		id = id_column()
+		${2}
