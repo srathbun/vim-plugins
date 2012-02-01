@@ -206,6 +206,7 @@ set completeopt=longest,menuone
 set autochdir
 " set the viminfo settings
 set viminfo='50,<1000,s100,:100,h,/100,@100,!,%,nC:/Program\ Files\ (x86)/vim/viminfo 
+set history=100
 
 
 " Function to disable the match paren plugin for remote file editing
