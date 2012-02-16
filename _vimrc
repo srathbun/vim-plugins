@@ -3,6 +3,7 @@ source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
 "behave mswin
 " set up pathogen
+au GUIEnter * simalt ~x
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 

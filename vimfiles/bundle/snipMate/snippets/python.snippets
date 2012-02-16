@@ -147,3 +147,8 @@ snippet table
 		__tablename__ = '$1'
 		id = id_column()
 		${2}
+
+		def __init__(self, rec, id=None):
+			if id:
+				self.id = id
+			$2
