@@ -152,3 +152,6 @@ snippet table
 			if id:
 				self.id = id
 			$2
+snippet tbl
+	class ${1:newtable}(Base):
+		__table__ = metadata.tables['$1']

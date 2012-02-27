@@ -105,11 +105,14 @@ autocmd QuickFixCmdPost [^l]* nested cwindow
 " turn on line numbers
 set nu
 set backspace=indent,eol,start
-"colorscheme darkblue
-colorscheme zenburn
-set guifont=Consolas:h11:cANSI
-set t_Co=256
+
+"colorscheme setup for gui or windows prompt
 set background=dark
+colorscheme sorcerer
+
+au GUIEnter * set t_Co=256
+au GUIEnter * colorscheme zenburn
+set guifont=Consolas:h11:cANSI
 
 " turn on autoindent
 set ai
