@@ -107,11 +107,12 @@ set nu
 set backspace=indent,eol,start
 
 "colorscheme setup for gui or windows prompt
-set background=dark
-colorscheme sorcerer
+set background=light
+colorscheme elflord
 
 au GUIEnter * set t_Co=256
 au GUIEnter * colorscheme zenburn
+au GUIEnter * set background=dark
 set guifont=Consolas:h11:cANSI
 
 " turn on autoindent
@@ -295,7 +296,10 @@ let g:pymode_rope_guess_project = 0
 let g:pydoc = 'c:/Python27/lib/pydoc.py'
 
 " Alternate python syntax highlighting options
+let python_highlight_all = 1
 highlight InheritUnderlined ctermfg=118 cterm=underline guifg=#1FF07A gui=underline
 highlight Operator          ctermfg=186 cterm=none guifg=#c9c484 gui=none 
 highlight pythonBuiltin     ctermfg=88 cterm=none guifg=#d1a243 gui=none 
-let python_highlight_all = 1
+au GUIEnter * highlight InheritUnderlined ctermfg=118 cterm=underline guifg=#1FF07A gui=underline
+au GUIEnter * highlight Operator          ctermfg=186 cterm=none guifg=#c9c484 gui=none 
+au GUIEnter * highlight pythonBuiltin     ctermfg=88 cterm=none guifg=#d1a243 gui=none 
