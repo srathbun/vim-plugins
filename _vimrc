@@ -107,13 +107,16 @@ set nu
 set backspace=indent,eol,start
 
 "colorscheme setup for gui or windows prompt
-set background=light
-colorscheme elflord
+if has("gui_running")
+	set t_Co=256
+	colorscheme zenburn
+	set background=dark
+	set guifont=Consolas:h11:cANSI
+else
+	set background=light
+	colorscheme elflord
+endif
 
-au GUIEnter * set t_Co=256
-au GUIEnter * colorscheme zenburn
-au GUIEnter * set background=dark
-set guifont=Consolas:h11:cANSI
 
 " turn on autoindent
 set ai
