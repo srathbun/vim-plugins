@@ -1,9 +1,6 @@
 set nocompatible
-source $VIMRUNTIME/vimrc_example.vim
-source $VIMRUNTIME/mswin.vim
-"behave mswin
 " set up pathogen
-au GUIEnter * simalt ~x
+"au GUIEnter * simalt ~x
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
@@ -72,10 +69,12 @@ set hlsearch
 set ea
 
 " turn on persistent undo
-set undodir=C:\\Program\ Files\ (x86)\\Vim\\undoFiles
+set undodir=~/.undo
 set undofile 
 " have backup files and swap files saved to a temp folder
-set backupdir=C:\\temp\\vimtmp
+" Using /var/tmp because I have set /tmp to be tmpfs, /var/tmp is for 
+" temp files that live through reboots
+set backupdir=/var/tmp
 " turn on syntax highlighting
 syntax on
 autocmd BufRead,BufNewFile *.psl setfiletype psl
@@ -105,15 +104,11 @@ autocmd QuickFixCmdPost [^l]* nested cwindow
 " turn on line numbers
 set nu
 set backspace=indent,eol,start
-
-"colorscheme setup for gui or windows prompt
-set background=light
-colorscheme elflord
-
-au GUIEnter * set t_Co=256
-au GUIEnter * colorscheme zenburn
-au GUIEnter * set background=dark
-set guifont=Consolas:h11:cANSI
+colorscheme desert
+"colorscheme zenburn
+"set guifont=Consolas:h11:cANSI
+set t_Co=256
+set background=dark
 
 " turn on autoindent
 set ai
@@ -210,7 +205,7 @@ set completeopt=longest,menuone
 "buffer
 set autochdir
 " set the viminfo settings
-set viminfo='50,<1000,s100,:100,h,/100,@100,!,%,nC:/Program\ Files\ (x86)/vim/viminfo 
+set viminfo='50,<1000,s100,:100,h,/100,@100,!,%,n~/.viminfo 
 set history=100
 
 
@@ -274,11 +269,13 @@ command! -nargs=0 ToggleRemoteFile call s:ToggleRemoteFile()
 let g:SuperTabLongestHighlight = 1
 let g:SuperTabDefaultCompletionType = "context"
 " commands associated with project plugin
-let g:proj_flags='imsStTv'
-let g:proj_run2='!fossil add %n'
-let g:proj_run3='!fossil revert %n'
-let g:proj_run4='!fossil undo'
-let g:proj_run_fold3='!fossil commit'
+let g:proj_flags='imsStT'
+let g:proj_run2="!hg add '%r/%n'"
+let g:proj_run3="!hg revert '%r/%n'"
+let g:proj_run4="!hg undo"
+let g:proj_run_fold3="!hg commit"
+" Set up winmanager
+let winManagerWindowLayout = 'FileExplorer|TagList'
 
 " compiler commands
 autocmd BufNewFile,BufRead *.psl compiler psl
@@ -296,10 +293,8 @@ let g:pymode_rope_guess_project = 0
 let g:pydoc = 'c:/Python27/lib/pydoc.py'
 
 " Alternate python syntax highlighting options
-let python_highlight_all = 1
 highlight InheritUnderlined ctermfg=118 cterm=underline guifg=#1FF07A gui=underline
 highlight Operator          ctermfg=186 cterm=none guifg=#c9c484 gui=none 
 highlight pythonBuiltin     ctermfg=88 cterm=none guifg=#d1a243 gui=none 
-au GUIEnter * highlight InheritUnderlined ctermfg=118 cterm=underline guifg=#1FF07A gui=underline
-au GUIEnter * highlight Operator          ctermfg=186 cterm=none guifg=#c9c484 gui=none 
-au GUIEnter * highlight pythonBuiltin     ctermfg=88 cterm=none guifg=#d1a243 gui=none 
+let python_highlight_all = 1
+
