@@ -2,9 +2,8 @@
 
 clone to ~/.vim/
 install pathogen
-symlink ~/.vim/bundle -> ~/.vim/vimfiles/bundle
-(uses ln -s ~/.vim/vimfiles/bundle ~/.vim/bundle)
-copy _vimrc to ~/.vimrc
-Edit .vimrc for linux (adjust paths, disable windows specific code)
+git checkout linux ( to get the linux branch )
+symlink ~/.vimrc to vimrc
+( uses ln -s vimrc ~/.vimrc )
 run find ~/.vim/bundle -follow -exec dos2unix -f '{}' \;
 
