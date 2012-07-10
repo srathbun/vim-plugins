@@ -1,0 +1,10 @@
+*Mostly* cross platform vimrc and plugins. Default setup is for windows, to use with linux, follow these instructions.
+
+clone to ~/.vim/
+install pathogen
+symlink ~/.vim/bundle -> ~/.vim/vimfiles/bundle
+(uses ln -s ~/.vim/vimfiles/bundle ~/.vim/bundle)
+copy _vimrc to ~/.vimrc
+Edit .vimrc for linux (adjust paths, disable windows specific code)
+run find ~/.vim/bundle -follow -exec dos2unix -f '{}' \;
+
