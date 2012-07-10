@@ -4,3 +4,6 @@
 [submodule "vimfiles/bundle/python-mode"]
 	path = vimfiles/bundle/python-mode
 	url = git://github.com/klen/python-mode.git
+[submodule "vimfiles/bundle/ack"]
+	path = vimfiles/bundle/ack
+	url = git://github.com/mileszs/ack.vim.git
