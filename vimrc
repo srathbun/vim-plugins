@@ -104,6 +104,7 @@ autocmd QuickFixCmdPost [^l]* nested cwindow
 " turn on line numbers
 set nu
 set backspace=indent,eol,start
+
 colorscheme desert
 "colorscheme zenburn
 "set guifont=Consolas:h11:cANSI
