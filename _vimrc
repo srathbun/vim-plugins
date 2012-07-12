@@ -306,3 +306,5 @@ highlight pythonBuiltin     ctermfg=88 cterm=none guifg=#d1a243 gui=none
 au GUIEnter * highlight InheritUnderlined ctermfg=118 cterm=underline guifg=#1FF07A gui=underline
 au GUIEnter * highlight Operator          ctermfg=186 cterm=none guifg=#c9c484 gui=none 
 au GUIEnter * highlight pythonBuiltin     ctermfg=88 cterm=none guifg=#d1a243 gui=none 
+
+let maplocalleader = ","
