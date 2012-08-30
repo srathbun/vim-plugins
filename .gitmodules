@@ -16,3 +16,6 @@
 [submodule "vimfiles/bundle/node-dict"]
 	path = vimfiles/bundle/node-dict
 	url = git://github.com/guileen/vim-node.git
+[submodule "vimfiles/bundle/node-complete"]
+	path = vimfiles/bundle/node-complete
+	url = git://github.com/myhere/vim-nodejs-complete.git
