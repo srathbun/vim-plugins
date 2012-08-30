@@ -13,3 +13,6 @@
 [submodule "vimfiles/bundle/tagbar"]
 	path = vimfiles/bundle/tagbar
 	url = git://github.com/majutsushi/tagbar.git
+[submodule "vimfiles/bundle/node-dict"]
+	path = vimfiles/bundle/node-dict
+	url = git://github.com/guileen/vim-node.git

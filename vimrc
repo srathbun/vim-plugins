@@ -299,3 +299,4 @@ highlight Operator          ctermfg=186 cterm=none guifg=#c9c484 gui=none
 highlight pythonBuiltin     ctermfg=88 cterm=none guifg=#d1a243 gui=none 
 let python_highlight_all = 1
 
+au FileType javascript set dictionary+=$HOME/.vim/bundle/node-dict/dict/node.dict
