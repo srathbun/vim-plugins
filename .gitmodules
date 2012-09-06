@@ -25,3 +25,6 @@
 [submodule "vimfiles/bundle/vim-json"]
 	path = vimfiles/bundle/vim-json
 	url = https://github.com/elzr/vim-json
+[submodule "vimfiles/bundle/vim-taglist-plus"]
+	path = vimfiles/bundle/vim-taglist-plus
+	url = https://github.com/johnbintz/vim-taglist-plus
