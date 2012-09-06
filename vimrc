@@ -102,12 +102,13 @@ autocmd QuickFixCmdPost [^l]* nested cwindow
 
 
 " turn on line numbers
-set nu
+set rnu
 set backspace=indent,eol,start
 
 colorscheme desert
 "colorscheme zenburn
 "set guifont=Consolas:h11:cANSI
+set guifont=Monoco:h11:cANSI
 set t_Co=256
 set background=dark
 
@@ -123,6 +124,9 @@ filetype indent on "indent depends on filetype
 
 "Informative status line
 set statusline=%F%m%r%h%w\ [TYPE=%Y\ %{&ff}]\ [%l/%L\ (%p%%)]
+set statusline+=\ %#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
 "Enable indent folding
 set foldenable
@@ -300,3 +304,23 @@ highlight pythonBuiltin     ctermfg=88 cterm=none guifg=#d1a243 gui=none
 let python_highlight_all = 1
 
 au FileType javascript set dictionary+=$HOME/.vim/bundle/node-dict/dict/node.dict
+
+nmap <F6> :TagbarToggle<CR>
+
+" Syntastic options
+let g:syntastic_check_on_open=1
+let g:syntastic_enable_signs=1
+
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+
+let g:syntastic_enable_balloons = 1
+let g:syntastic_auto_loc_list=1
+
+let g:syntastic_loc_list_height=6
+let g:syntastic_mode_map = { 'mode': 'active',
+						   \ 'active_filetypes': ['ruby', 'php', 'js', 'sh'],
+						   \ 'passive_filetypes': ['puppet', 'python'] }
+
+let g:syntastic_quiet_warnings=1
+let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
