@@ -102,7 +102,7 @@ autocmd QuickFixCmdPost [^l]* nested cwindow
 
 
 " turn on line numbers
-set rnu
+set nu
 set backspace=indent,eol,start
 
 colorscheme desert
@@ -324,3 +324,15 @@ let g:syntastic_mode_map = { 'mode': 'active',
 
 let g:syntastic_quiet_warnings=1
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+
+" search for a tags file in the current dir, looking recursively up towards
+" root until one is found
+set tags=./tags;/
+
+nmap <F7> :TlistToggle<CR>
+
+"Higlight current line only in insert mode
+autocmd InsertLeave * set nocursorline
+autocmd InsertEnter * set cursorline
+"cursorline coloring
+highlight CursorLine ctermbg=8 cterm=NONE

@@ -79,7 +79,7 @@ snippet do
 	} while (${1:/* condition */});
 # Object Method
 snippet :f
-	${1:method_name}: function(${2:attribute}) {
+	${1:method_name}: function $1(${2:attribute}) {
 		${4}
 	}${3:,}
 # setTimeout function
@@ -94,9 +94,38 @@ snippet gett
 # Get Element
 snippet try
 	try {
-		${2}
+		${1}
 	} catch (${2:e}) {
 	}
 # console.log (Firebug)
 snippet cl
 	console.log(${1});
+# eagle6 skeleton
+snippet skel
+	// ${1:Classname}
+	/*jshint es5:true*/
+	/*globals console:true Array:true*/
+	var jsext = require("jsext"),
+		console = new jsext.Console();
+
+	var ${2:reqItems} = require("$2");
+
+	var $1 = oo.Class.create({
+
+		constructor: function $1(){
+			${3://Do nothing}
+		},
+
+		statics: {
+			${4://No static vars}
+		},
+
+		members: {
+
+			${5://snipmate object method uses :f}
+
+		}
+
+	});
+
+	exports = module.exports = $1;
