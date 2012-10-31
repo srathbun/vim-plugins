@@ -28,3 +28,6 @@
 [submodule "vimfiles/bundle/vim-taglist-plus"]
 	path = vimfiles/bundle/vim-taglist-plus
 	url = https://github.com/johnbintz/vim-taglist-plus
+[submodule "vimfiles/bundle/puppet"]
+	path = vimfiles/bundle/puppet
+	url = git://github.com/rodjek/vim-puppet.git
