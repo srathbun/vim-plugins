@@ -130,6 +130,7 @@ set statusline+=%*
 
 "Enable indent folding
 set foldenable
+let javaScript_fold = 1
 set fdm=indent
 
 "Hide buffer when not in window (to prevent relogin with FTP edit)
