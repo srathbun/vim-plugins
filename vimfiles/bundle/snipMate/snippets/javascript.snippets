@@ -112,6 +112,16 @@ snippet skel
 
 	var $1 = oo.Class.create({
 
+		schema: {
+
+			$6: {
+				type: ${7:String},
+				description: "$8",
+				isRequired: ${9:true},
+			}
+
+		},
+
 		constructor: function $1(){
 			${3://Do nothing}
 		},
@@ -129,3 +139,33 @@ snippet skel
 	});
 
 	exports = module.exports = $1;
+snippet klass
+	var ${1:classname} = oo.Class.create({
+
+		/* ${2:notes} */
+
+		schema: {
+
+			$6: {
+				type: ${7:String},
+				description: "$8",
+				isRequired: ${9:true},
+			}
+
+		},
+
+		constructor: function $1(){
+			${3://Do nothing}
+		},
+
+		statics: {
+			${4://No static vars}
+		},
+
+		members: {
+
+			${5://snipmate object method uses :f}
+
+		}
+
+	});
