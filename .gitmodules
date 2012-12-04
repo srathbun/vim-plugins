@@ -34,3 +34,6 @@
 [submodule "vimfiles/bundle/vim-javascript"]
 	path = vimfiles/bundle/vim-javascript
 	url = https://github.com/pangloss/vim-javascript.git
+[submodule "vimfiles/bundle/vim-dochub"]
+	path = vimfiles/bundle/vim-dochub
+	url = https://github.com/stephenmckinney/vim-dochub.git
