@@ -40,3 +40,6 @@
 [submodule "vimfiles/bundle/vim-nodejs-complete"]
 	path = vimfiles/bundle/vim-nodejs-complete
 	url = https://github.com/myhere/vim-nodejs-complete.git
+[submodule "vimfiles/bundle/supertab"]
+	path = vimfiles/bundle/supertab
+	url = https://github.com/ervandew/supertab.git
