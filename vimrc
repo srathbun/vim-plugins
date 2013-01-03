@@ -97,7 +97,7 @@ autocmd QuickFixCmdPost [^l]* nested cwindow
 set nu
 set backspace=indent,eol,start
 
-colorscheme marklar
+colorscheme zenburn
 "set guifont=Consolas:h11:cANSI
 set guifont=Monoco:h11:cANSI
 set t_Co=256
@@ -309,7 +309,16 @@ let python_highlight_all = 1
 
 au FileType javascript set dictionary+=$HOME/.vim/bundle/node-dict/dict/node.dict
 
+" NERDTree options
+nmap <F5> :NERDTreeToggle<CR>
+" Open NERDTree if vim is empty
+autocmd vimenter * if !argc() | NERDTree | endif
+" close vim if NERDTree is the last buffer
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+
 nmap <F6> :TagbarToggle<CR>
+nmap <F7> :TlistToggle<CR>
 
 " Syntastic options
 let g:syntastic_check_on_open=1
@@ -333,7 +342,6 @@ let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 " root until one is found
 set tags=./tags;/
 
-nmap <F7> :TlistToggle<CR>
 
 "Higlight current line only in insert mode
 autocmd InsertLeave * set nocursorline
