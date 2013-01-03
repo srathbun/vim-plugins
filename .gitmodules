@@ -37,3 +37,6 @@
 [submodule "vimfiles/bundle/vim-dochub"]
 	path = vimfiles/bundle/vim-dochub
 	url = https://github.com/stephenmckinney/vim-dochub.git
+[submodule "vimfiles/bundle/vim-nodejs-complete"]
+	path = vimfiles/bundle/vim-nodejs-complete
+	url = https://github.com/myhere/vim-nodejs-complete.git
