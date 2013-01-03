@@ -79,14 +79,6 @@ set backupdir=/var/tmp
 syntax on
 autocmd BufRead,BufNewFile *.psl setfiletype psl
 autocmd BufRead,BufNewFile *.plb setfiletype psl
-"autocmd BufRead,BufNewFile *.let setfiletype let
-" use py compile to 'make' python code, for syntax checking with quickfix buf
-" autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
-" autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
-" Deprecated in favor of pylint
-autocmd BufRead *.py set makeprg=pylint\ --reports=n\ --rcfile=pylint.rc\ --output-format=parseable\ \"%:p\"
-autocmd BufRead *.py set efm=%A%f:%l:\ [%t%.%#]\ %m,%Z%p^^,%-C%.%#
-"autocmd BufRead *.py set efm=%+P[%f],%t%n:\ %#%l:%m,%Z,%+IYour\ code%m,%Z,%-G%.%#
 " use psl as 'make' program, recognizing error output for quickfix buffer
 autocmd BufRead *.psl set makeprg=runtime\ %:t:r.pjb\ -u
 autocmd BufRead *.psl set errorformat=%.%#\<%f\ -\ %l\\,%c\>%m,\<psl\>\ :\ Runtime\ error:\ in\ \"%f\"\ line\ %l\ %m
@@ -105,8 +97,7 @@ autocmd QuickFixCmdPost [^l]* nested cwindow
 set nu
 set backspace=indent,eol,start
 
-colorscheme desert
-"colorscheme zenburn
+colorscheme marklar
 "set guifont=Consolas:h11:cANSI
 set guifont=Monoco:h11:cANSI
 set t_Co=256
@@ -189,23 +180,6 @@ endfunction
 command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 
 nnoremap <silent> <Space> :silent noh<Bar>echo<CR>
-" turn on auto completion
-filetype plugin on
-if has("autocmd") && exists("+omnifunc")
-autocmd Filetype *
-		\	if &omnifunc == "" |
-		\		setlocal omnifunc=syntaxcomplete#Complete |
-		\	endif
-endif
-
-" make autocomplete more like an IDE
-set completeopt=longest,menuone
-"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-"inoremap <expr> <C-n> pumvisible() ? '<C-n>' :	\ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-
-"inoremap <expr> <M-,> pumvisible() ? '<C-n>' :\ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-" keep menu item always highlighted by simulating <Up> on pu visible
-"inoremap <expr> <C-p> pumvisible() ? '<C-p>' :	\ '<C-p><C-r>=pumvisible() ? "\<lt>Up>" : ""<CR>'
 
 "set vim to automatically change to the directory of the file in the current
 "buffer
@@ -272,8 +246,37 @@ endfunction
 command! -nargs=0 ToggleRemoteFile call s:ToggleRemoteFile()
 "noremap <F6> :ToggleRemoteFile<CR>
 
+
+" turn on auto completion
+filetype plugin on
+if has("autocmd") && exists("+omnifunc")
+autocmd Filetype *
+		\	if &omnifunc == "" |
+		\		setlocal omnifunc=syntaxcomplete#Complete |
+		\	endif
+endif
+
+" make autocomplete more like an IDE
+set completeopt=longest,menuone,preview
+"set complete=.,w,b,u,t,i,k
+set complete=.,k,t,i,d
+" automatically open and close the popup menu / preview window
+" au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+
+" supertab options
 let g:SuperTabLongestHighlight = 1
-let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabClosePreviewOnPopupClose = 1
+let g:SuperTabLongestEnhanced = 1
+"let g:SuperTabDefaultCompletionType = "context"
+"let g:SuperTabContextDefaultCompletionType = "<c-p>"
+
+autocmd FileType *
+\ if &omnifunc != '' |
+\   call SuperTabChain(&omnifunc, "<c-p>") |
+\   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+\ endif
+
+
 " commands associated with project plugin
 let g:proj_flags='imsStT'
 let g:proj_run2="!hg add '%r/%n'"
