@@ -129,6 +129,7 @@ set fdm=indent
 "set line wrapping
 set wrap
 set linebreak
+set breakat=" ^I!@*-+;:,./?{}()[]<>_"
 set nolist
 set textwidth=0
 set wrapmargin=0
@@ -350,3 +351,4 @@ autocmd InsertEnter * set cursorline
 highlight CursorLine ctermbg=8 cterm=NONE
 
 map <leader>l <Plug>TaskList
+nmap <leader>c :cclose<CR>:lclose<CR>
