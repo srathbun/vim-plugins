@@ -350,5 +350,5 @@ autocmd InsertEnter * set cursorline
 "cursorline coloring
 highlight CursorLine ctermbg=8 cterm=NONE
 
-map <leader>l <Plug>TaskList
+nmap <leader>l <Plug>TaskList
 nmap <leader>c :cclose<CR>:lclose<CR>
