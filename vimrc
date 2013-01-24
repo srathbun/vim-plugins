@@ -320,6 +320,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 nmap <F6> :TagbarToggle<CR>
 nmap <F7> :TlistToggle<CR>
+nmap <F8> :Gstatus<CR>
 
 " Syntastic options
 let g:syntastic_check_on_open=1
