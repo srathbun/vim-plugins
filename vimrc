@@ -358,3 +358,6 @@ nmap <leader>c :cclose<CR>:lclose<CR>
 " SWANK settings
 " not working
 " let g:slimv_swank_cmd = '!osascript -e "tell application \"Terminal\" to do script \"node ~/git/swank-js/swank.js\""'
+
+" bashsupport settings
+let g:BASH_Ctrl_j   = 'off'
