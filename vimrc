@@ -319,7 +319,11 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 
 nmap <F6> :TagbarToggle<CR>
+let g:tagbar_type_javascript = {
+	\ 'ctagsbin' : '/usr/local/bin/jsctags'
+\ }
 nmap <F7> :TlistToggle<CR>
+let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 nmap <F8> :Gstatus<CR>
 
 " Syntastic options
