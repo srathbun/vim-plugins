@@ -68,6 +68,9 @@ set hlsearch
 " turn off equalizing windows when one gets closed
 set ea
 
+" set mouse on for console
+set mouse=a
+
 " turn on persistent undo
 set undodir=~/.undo
 set undofile 
