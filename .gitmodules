@@ -49,6 +49,3 @@
 [submodule "vimfiles/bundle/bash-support"]
 	path = vimfiles/bundle/bash-support
 	url = https://github.com/vim-scripts/bash-support.vim.git
-[submodule "vimfiles/bundle/jsbeautify"]
-	path = vimfiles/bundle/jsbeautify
-	url = https://github.com/maksimr/vim-jsbeautify.git
