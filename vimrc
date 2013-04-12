@@ -312,7 +312,7 @@ highlight pythonBuiltin     ctermfg=88 cterm=none guifg=#d1a243 gui=none
 let python_highlight_all = 1
 
 au FileType javascript set dictionary+=$HOME/.vim/bundle/node-dict/dict/node.dict
-au FileType javascript setlocal equalprg=js-beautify\ -f\ -\ -q\ -t
+au FileType javascript setlocal equalprg=/usr/local/share/npm/bin/js-beautify\ -f\ -\ -q\ -t\ -j\ -w\ 140\ --good-stuff\ -b\ \"end-expand\"
 
 " NERDTree options
 nmap <F5> :NERDTreeToggle<CR>
