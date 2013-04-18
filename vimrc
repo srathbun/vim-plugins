@@ -263,7 +263,7 @@ endif
 " make autocomplete more like an IDE
 set completeopt=longest,menuone,preview
 "set complete=.,w,b,u,t,i,k
-set complete=.,k,t,i,d
+set complete=.,k,i,d " t allows completing on tags, but that takes waaay too long
 " automatically open and close the popup menu / preview window
 " au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
@@ -324,8 +324,35 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 
 nmap <F6> :TagbarToggle<CR>
 let g:tagbar_type_javascript = {
-	\ 'ctagsbin' : '/usr/local/bin/jsctags'
+	\ 'ctagstype' : 'Javascript',
+	\ 'ctagsbin' : '/usr/local/bin/ctags',
+	\ 'kinds'     : [
+		\ 'a:array',
+		\ 'b:boolean',
+		\ 'm:method',
+		\ 'n:number',
+		\ 'o:object',
+		\ 'p:property',
+		\ 's:string',
+		\ 'c:class',
+		\ 'f:function',
+		\ 'v:variable:0:0'
+	\ ],
+	\ 'sro'        : '.',
+	\ 'kind2scope' : {
+		\ 'o' : 'object'
+	\ },
+	\ 'scope2kind' : {
+		\ 'object' : 'o'
+	\ }
 \ }
+
+"let g:tagbar_type_javascript = {
+"	\ 'ctagsbin' : '/usr/local/bin/ctags'
+"\ }
+"let g:tlist_javascript_settings = 'javascript;s:string;a:array;o:object;f:function'
+let g:tlist_javascript_settings = 'javascript;a:array;b:boolean;c:class;f:function;m:method;n:number;o:object;p:property;s:string;v:variable'
+
 nmap <F7> :TlistToggle<CR>
 let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 nmap <F8> :Gstatus<CR>
