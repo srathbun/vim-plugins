@@ -4,31 +4,7 @@ set nocompatible
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
-
-set diffexpr=MyDiff()
-function MyDiff()
-	let opt = '-a --binary '
-	if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-	if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-	let arg1 = v:fname_in
-	if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-	let arg2 = v:fname_new
-	if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-	let arg3 = v:fname_out
-	if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-	let eq = ''
-	if $VIMRUNTIME =~ ' '
-		if &sh =~ '\<cmd'
-			let cmd = '""' . $VIMRUNTIME . '\diff"'
-			let eq = '"'
-		else
-			let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-		endif
-	else
-		let cmd = $VIMRUNTIME . '\diff'
-	endif
-	silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-endfunction
+set diffopt+=iwhite
 
 " Return indent (all whitespace at start of a line), converted from
 " tabs to spaces if what = 1, or from spaces to tabs otherwise.
@@ -80,20 +56,31 @@ set undofile
 set backupdir=/var/tmp
 " turn on syntax highlighting
 syntax on
-autocmd BufRead,BufNewFile *.psl setfiletype psl
-autocmd BufRead,BufNewFile *.plb setfiletype psl
-" use psl as 'make' program, recognizing error output for quickfix buffer
-autocmd BufRead *.psl set makeprg=runtime\ %:t:r.pjb\ -u
-autocmd BufRead *.psl set errorformat=%.%#\<%f\ -\ %l\\,%c\>%m,\<psl\>\ :\ Runtime\ error:\ in\ \"%f\"\ line\ %l\ %m
-" Automatically open, but do not go to (if there are errors) the quickfix /
-" location list window, or close it when is has become empty.
-"
-" Note: Must allow nesting of autocmds to enable any customizations for quickfix
-" buffers.
-" Note: Normally, :cwindow jumps to the quickfix window if the command opens it
-" (but not if it's already open). However, as part of the autocmd, this doesn't
-" seem to happen.
-autocmd QuickFixCmdPost [^l]* nested cwindow
+
+augroup pslfiles
+	autocmd! 
+	" wipes autocmds before setting them
+	autocmd BufRead,BufNewFile *.psl setfiletype psl
+	autocmd BufRead,BufNewFile *.plb setfiletype psl
+	" use psl as 'make' program, recognizing error output for quickfix buffer
+	autocmd BufRead *.psl set makeprg=runtime\ %:t:r.pjb\ -u
+	autocmd BufRead *.psl set errorformat=%.%#\<%f\ -\ %l\\,%c\>%m,\<psl\>\ :\ Runtime\ error:\ in\ \"%f\"\ line\ %l\ %m
+	" compiler commands
+	autocmd BufNewFile,BufRead *.psl compiler psl
+augroup END
+
+augroup quickfix
+	" Automatically open, but do not go to (if there are errors) the quickfix /
+	" location list window, or close it when is has become empty.
+	"
+	" Note: Must allow nesting of autocmds to enable any customizations for quickfix
+	" buffers.
+	" Note: Normally, :cwindow jumps to the quickfix window if the command opens it
+	" (but not if it's already open). However, as part of the autocmd, this doesn't
+	" seem to happen.
+	autocmd!
+	autocmd QuickFixCmdPost [^l]* nested cwindow
+augroup END
 
 
 " turn on line numbers
@@ -254,16 +241,24 @@ command! -nargs=0 ToggleRemoteFile call s:ToggleRemoteFile()
 " turn on auto completion
 filetype plugin on
 if has("autocmd") && exists("+omnifunc")
-autocmd Filetype *
-		\	if &omnifunc == "" |
-		\		setlocal omnifunc=syntaxcomplete#Complete |
-		\	endif
+augroup omnifunc
+	autocmd!
+	autocmd Filetype *
+			\	if &omnifunc == "" |
+			\		setlocal omnifunc=syntaxcomplete#Complete |
+			\	endif
+	autocmd FileType *
+	\ if &omnifunc != '' |
+	\   call SuperTabChain(&omnifunc, "<c-p>") |
+	\   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+	\ endif
+augroup END
 endif
 
 " make autocomplete more like an IDE
 set completeopt=longest,menuone,preview
 "set complete=.,w,b,u,t,i,k
-set complete=.,k,i,d " t allows completing on tags, but that takes waaay too long
+set complete=.,k,t,i,d " t allows completing on tags, but that takes waaay too long
 " automatically open and close the popup menu / preview window
 " au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
@@ -274,11 +269,6 @@ let g:SuperTabLongestEnhanced = 1
 "let g:SuperTabDefaultCompletionType = "context"
 "let g:SuperTabContextDefaultCompletionType = "<c-p>"
 
-autocmd FileType *
-\ if &omnifunc != '' |
-\   call SuperTabChain(&omnifunc, "<c-p>") |
-\   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-\ endif
 
 
 " commands associated with project plugin
@@ -290,8 +280,6 @@ let g:proj_run_fold3="!hg commit"
 " Set up winmanager
 let winManagerWindowLayout = 'FileExplorer|TagList'
 
-" compiler commands
-autocmd BufNewFile,BufRead *.psl compiler psl
 " highlight long lines
 "highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 "match OverLength /\%160v.\+/
@@ -316,10 +304,13 @@ au FileType javascript setlocal equalprg=/usr/local/share/npm/bin/js-beautify\ -
 
 " NERDTree options
 nmap <F5> :NERDTreeToggle<CR>
-" Open NERDTree if vim is empty
-autocmd vimenter * if !argc() | NERDTree | endif
-" close vim if NERDTree is the last buffer
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+augroup nerdTree
+	autocmd!
+	" Open NERDTree if vim is empty
+	autocmd vimenter * if !argc() | NERDTree | endif
+	" close vim if NERDTree is the last buffer
+	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+augroup END
 
 
 nmap <F6> :TagbarToggle<CR>
@@ -340,10 +331,12 @@ let g:tagbar_type_javascript = {
 	\ ],
 	\ 'sro'        : '.',
 	\ 'kind2scope' : {
-		\ 'o' : 'object'
+		\ 'o' : 'object',
+		\ 'f' : 'function'
 	\ },
 	\ 'scope2kind' : {
-		\ 'object' : 'o'
+		\ 'object' : 'o',
+		\ 'function' : 'f'
 	\ }
 \ }
 
@@ -380,9 +373,12 @@ let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 set tags=./tags;/
 
 
-"Higlight current line only in insert mode
-autocmd InsertLeave * set nocursorline
-autocmd InsertEnter * set cursorline
+augroup insertMode
+	autocmd!
+	"Higlight current line only in insert mode
+	autocmd InsertLeave * set nocursorline
+	autocmd InsertEnter * set cursorline
+augroup END
 "cursorline coloring
 highlight CursorLine ctermbg=8 cterm=NONE
 
