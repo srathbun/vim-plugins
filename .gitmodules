@@ -49,3 +49,6 @@
 [submodule "vimfiles/bundle/bash-support"]
 	path = vimfiles/bundle/bash-support
 	url = https://github.com/vim-scripts/bash-support.vim.git
+[submodule "vimfiles/bundle/vim-slime"]
+	path = vimfiles/bundle/vim-slime
+	url = https://github.com/srathbun/vim-slime.git
