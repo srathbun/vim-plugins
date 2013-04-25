@@ -395,5 +395,9 @@ xmap <leader>s <Plug>SlimeRegionSend
 nmap <leader>s <Plug>SlimeMotionSend
 nmap <leader>ss <Plug>SlimeLineSend
 
+xmap <leader>e <Plug>SlimeRegionEval
+nmap <leader>e <Plug>SlimeMotionEval
+nmap <leader>ee <Plug>SlimeLineEval
+
 " bashsupport settings
 let g:BASH_Ctrl_j   = 'off'
