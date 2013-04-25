@@ -389,6 +389,11 @@ nmap <leader>c :cclose<CR>:lclose<CR>
 " SWANK settings
 " not working
 " let g:slimv_swank_cmd = '!osascript -e "tell application \"Terminal\" to do script \"node ~/git/swank-js/swank.js\""'
+let g:slime_target = "tmux"
+let g:slime_no_mappings = 1
+xmap <leader>s <Plug>SlimeRegionSend
+nmap <leader>s <Plug>SlimeMotionSend
+nmap <leader>ss <Plug>SlimeLineSend
 
 " bashsupport settings
 let g:BASH_Ctrl_j   = 'off'
