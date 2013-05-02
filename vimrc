@@ -44,6 +44,7 @@ set hlsearch
 " turn off equalizing windows when one gets closed
 set ea
 
+set ruler
 " set mouse on for console
 set mouse=a
 
@@ -299,8 +300,6 @@ highlight Operator          ctermfg=186 cterm=none guifg=#c9c484 gui=none
 highlight pythonBuiltin     ctermfg=88 cterm=none guifg=#d1a243 gui=none 
 let python_highlight_all = 1
 
-au FileType javascript set dictionary+=$HOME/.vim/bundle/node-dict/dict/node.dict
-au FileType javascript setlocal equalprg=/usr/local/share/npm/bin/js-beautify\ -f\ -\ -q\ -t\ -j\ -w\ 140\ --good-stuff\ -b\ \"end-expand\"
 
 " NERDTree options
 nmap <F5> :NERDTreeToggle<CR>
@@ -368,6 +367,13 @@ let g:syntastic_mode_map = { 'mode': 'active',
 let g:syntastic_quiet_warnings=1
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 
+augroup jsopts
+	au FileType javascript set dictionary+=$HOME/.vim/bundle/node-dict/dict/node.dict
+	au FileType javascript setlocal equalprg=/usr/local/share/npm/bin/js-beautify\ -f\ -\ -q\ -t\ -j\ -w\ 140\ --good-stuff\ -b\ \"end-expand\"
+	let s:script = 'var p = require.resolve("jshint"); var l = p.indexOf("jshint"); process.stdout.write(p.substr(0, l)+"jshint/bin/jshint");'
+	au FileType javascript let g:syntastic_javascript_jshint_exe = system("node -e '" . s:script . "'")
+augroup END
+
 " search for a tags file in the current dir, looking recursively up towards
 " root until one is found
 set tags=./tags;/
@@ -401,3 +407,6 @@ nmap <leader>ee <Plug>SlimeLineEval
 
 " bashsupport settings
 let g:BASH_Ctrl_j   = 'off'
+let g:BASH_AuthorName   = 'Spencer Rathbun'
+let g:BASH_Email        = 'srathbun@riverainc.com'
+let g:BASH_Company      = 'Rivera Group Inc.'
