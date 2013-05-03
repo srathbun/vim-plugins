@@ -251,11 +251,12 @@ augroup omnifunc
 	autocmd FileType *
 	\ if &omnifunc != '' |
 	\   call SuperTabChain(&omnifunc, "<c-p>") |
-	\   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+	\   call SuperTabSetDefaultCompletionType("context") |
 	\ endif
 augroup END
 endif
 
+	"\   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
 " make autocomplete more like an IDE
 set completeopt=longest,menuone,preview
 "set complete=.,w,b,u,t,i,k
@@ -267,9 +268,10 @@ set complete=.,k,t,i,d " t allows completing on tags, but that takes waaay too l
 let g:SuperTabLongestHighlight = 1
 let g:SuperTabClosePreviewOnPopupClose = 1
 let g:SuperTabLongestEnhanced = 1
-"let g:SuperTabDefaultCompletionType = "context"
-"let g:SuperTabContextDefaultCompletionType = "<c-p>"
-
+let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+let g:SuperTabContextDiscoverDiscovery =
+	\ ["&omnifunc:<c-x><c-o>", "&completefunc:<c-x><c-u>"]
 
 
 " commands associated with project plugin
@@ -368,8 +370,10 @@ let g:syntastic_quiet_warnings=1
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 
 augroup jsopts
+	autocmd!
 	au FileType javascript set dictionary+=$HOME/.vim/bundle/node-dict/dict/node.dict
 	au FileType javascript setlocal equalprg=/usr/local/share/npm/bin/js-beautify\ -f\ -\ -q\ -t\ -j\ -w\ 140\ --good-stuff\ -b\ \"end-expand\"
+	au FileType javascript call tern#Enable()
 	let s:script = 'var p = require.resolve("jshint"); var l = p.indexOf("jshint"); process.stdout.write(p.substr(0, l)+"jshint/bin/jshint");'
 	au FileType javascript let g:syntastic_javascript_jshint_exe = system("node -e '" . s:script . "'")
 augroup END
@@ -391,6 +395,17 @@ highlight CursorLine ctermbg=8 cterm=NONE
 nmap <leader>l <Plug>TaskList
 nmap <leader>c :cclose<CR>:lclose<CR>
 
+nnoremap <silent> <Leader>g :CommandT<CR>
+
+nnoremap <buffer> <Leader>td :TernDoc<CR>
+nnoremap <buffer> <Leader>tb :TernDocBrowse<CR>
+nnoremap <buffer> <Leader>tt :TernType<CR>
+nnoremap <buffer> <Leader>td :TernDef<CR>
+nnoremap <buffer> <Leader>tpd :TernDefPreview<CR>
+nnoremap <buffer> <Leader>tsd :TernDefSplit<CR>
+nnoremap <buffer> <Leader>ttd :TernDefTab<CR>
+nnoremap <buffer> <Leader>tr :TernRefs<CR>
+nnoremap <buffer> <Leader>tR :TernRename<CR>
 
 " SWANK settings
 " not working
