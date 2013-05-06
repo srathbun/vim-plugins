@@ -1,8 +1,19 @@
 set nocompatible
 " set up pathogen
 "au GUIEnter * simalt ~x
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+" To disable a plugin, add it's bundle name to the following list
+let g:pathogen_disabled = ['dbext', 'headlights', 'winmanager', 'slimv', 'psl', 'puppet', 'drawit', 'vim-taglist-plus', 'tagbar']
+
+" for some reason the csscolor plugin is very slow when run on the terminal
+" but not in GVim, so disable it if no GUI is running
+if !has('gui_running')
+    call add(g:pathogen_disabled, 'csscolor')
+endif
+
+call pathogen#infect()
+"call pathogen#runtime_append_all_bundles()
+" use this to update helptags
+"call pathogen#helptags()
 
 set diffopt+=iwhite
 
