@@ -2,7 +2,11 @@ set nocompatible
 " set up pathogen
 "au GUIEnter * simalt ~x
 " To disable a plugin, add it's bundle name to the following list
-let g:pathogen_disabled = ['dbext', 'headlights', 'winmanager', 'slimv', 'psl', 'puppet', 'drawit', 'vim-taglist-plus', 'tagbar']
+"let g:pathogen_disabled = ['dbext', 'headlights', 'winmanager', 'slimv', 'psl', 'puppet', 'drawit', 'vim-taglist-plus', 'tagbar']
+if !exists("g:pathogen_disabled")
+	let g:pathogen_disabled = []
+endif
+call extend(g:pathogen_disabled, ['dbext', 'headlights', 'winmanager', 'slimv', 'psl', 'puppet', 'drawit', 'vim-taglist-plus', 'tagbar'])
 
 " for some reason the csscolor plugin is very slow when run on the terminal
 " but not in GVim, so disable it if no GUI is running
