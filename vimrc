@@ -366,6 +366,8 @@ nmap <F7> :TlistToggle<CR>
 let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 nmap <F8> :Gstatus<CR>
 
+set pastetoggle=<F9>
+
 " Syntastic options
 let g:syntastic_check_on_open=1
 let g:syntastic_enable_signs=1
