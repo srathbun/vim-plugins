@@ -383,7 +383,7 @@ let g:syntastic_mode_map = { 'mode': 'active',
 						   \ 'active_filetypes': ['ruby', 'php', 'js', 'sh'],
 						   \ 'passive_filetypes': ['puppet', 'python'] }
 
-let g:syntastic_quiet_warnings=1
+let g:syntastic_quiet_warnings=0
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 
 augroup jsopts
@@ -392,7 +392,10 @@ augroup jsopts
 	au FileType javascript setlocal equalprg=/usr/local/share/npm/bin/js-beautify\ -f\ -\ -q\ -t\ -j\ -w\ 140\ --good-stuff\ -b\ \"end-expand\"
 	au FileType javascript call tern#Enable()
 	let s:script = 'var p = require.resolve("jshint"); var l = p.indexOf("jshint"); process.stdout.write(p.substr(0, l)+"jshint/bin/jshint");'
-	au FileType javascript let g:syntastic_javascript_jshint_exe = system("node -e '" . s:script . "'")
+	let s:jshintLocation = system("node -e '" . s:script . "'")
+	if v:shell_error != 8
+		au FileType javascript let g:syntastic_javascript_jshint_exe = s:jshintLocation
+	endif
 augroup END
 
 " search for a tags file in the current dir, looking recursively up towards
