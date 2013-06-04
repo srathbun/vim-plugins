@@ -386,10 +386,18 @@ let g:syntastic_mode_map = { 'mode': 'active',
 let g:syntastic_quiet_warnings=0
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 
+function! FindRequire(name)
+	let l:first = 'process.stdout.write(require.resolve("'
+	let l:last  = '"));'
+	return system("node -e '" . l:first . a:name . l:last . "'")
+endfunction
+
 augroup jsopts
 	autocmd!
 	au FileType javascript set dictionary+=$HOME/.vim/bundle/node-dict/dict/node.dict
 	au FileType javascript setlocal equalprg=/usr/local/share/npm/bin/js-beautify\ -f\ -\ -q\ -t\ -j\ -w\ 140\ --good-stuff\ -b\ \"end-expand\"
+	au FileType javascript set suffixesadd=.js,.json
+	au FileType javascript set includeexpr=FindRequire(v:fname)
 	au FileType javascript call tern#Enable()
 	let s:script = 'var p = require.resolve("jshint"); var l = p.indexOf("jshint"); process.stdout.write(p.substr(0, l)+"jshint/bin/jshint");'
 	let s:jshintLocation = system("node -e '" . s:script . "'")
