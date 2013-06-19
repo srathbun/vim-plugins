@@ -403,6 +403,7 @@ augroup jsopts
 	au FileType javascript set suffixesadd=.js,.json
 	au FileType javascript set includeexpr=FindRequire(v:fname)
 	au FileType javascript call tern#Enable()
+	au FileType javascript au BufWritePre <buffer> :%s/\s\+$//e
 	let s:script = 'var p = require.resolve("jshint"); var l = p.indexOf("jshint"); process.stdout.write(p.substr(0, l)+"jshint/bin/jshint");'
 	let s:jshintLocation = system("node -e '" . s:script . "'")
 	if v:shell_error != 8
