@@ -58,3 +58,6 @@
 [submodule "vimfiles/bundle/splice"]
 	path = vimfiles/bundle/splice
 	url = https://github.com/sjl/splice.vim.git
+[submodule "vimfiles/bundle/gundo"]
+	path = vimfiles/bundle/gundo
+	url = https://github.com/sjl/gundo.vim.git
