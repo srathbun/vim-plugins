@@ -318,6 +318,10 @@ highlight pythonBuiltin     ctermfg=88 cterm=none guifg=#d1a243 gui=none
 let python_highlight_all = 1
 
 
+" Gundo options
+nnoremap <F3> :GundoToggle<CR>
+let g:gundo_right = 1
+
 " NERDTree options
 nmap <F5> :NERDTreeToggle<CR>
 augroup nerdTree
