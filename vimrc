@@ -285,8 +285,7 @@ let g:SuperTabClosePreviewOnPopupClose = 1
 let g:SuperTabLongestEnhanced = 1
 let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
 let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-let g:SuperTabContextDiscoverDiscovery =
-	\ ["&omnifunc:<c-x><c-o>", "&completefunc:<c-x><c-u>"]
+"let g:SuperTabContextDiscoverDiscovery = ['&omnifunc:<c-x><c-o>', '&completefunc:<c-x><c-u>']
 
 
 " commands associated with project plugin
@@ -303,13 +302,15 @@ let winManagerWindowLayout = 'FileExplorer|TagList'
 "match OverLength /\%160v.\+/
 
 " Set up python mode settings
+let g:pymode_lint = 0
+let g:pymode_rope = 0
 let g:pymode_lint_checker = 'pyflakes'
-let g:pymode_lint_config = 'c:/Program Files (x86)/vim/pylint.rc'
+"let g:pymode_lint_config = 'c:/Program Files (x86)/vim/pylint.rc'
 let g:pymode_options_indent = 0
 let g:pymode_options_other = 0
 let g:pymode_options_fold = 0
 let g:pymode_rope_guess_project = 0
-let g:pydoc = 'c:/Python27/lib/pydoc.py'
+"let g:pydoc = 'c:/Python27/lib/pydoc.py'
 
 " Alternate python syntax highlighting options
 highlight InheritUnderlined ctermfg=118 cterm=underline guifg=#1FF07A gui=underline
