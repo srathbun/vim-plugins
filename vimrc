@@ -428,6 +428,8 @@ highlight CursorLine ctermbg=8 cterm=NONE
 
 nmap <leader>l <Plug>TaskList
 nmap <leader>c :cclose<CR>:lclose<CR>
+" yank to clipboard
+noremap <leader>y "*y
 
 nnoremap <silent> <Leader>g :CommandT<CR>
 
