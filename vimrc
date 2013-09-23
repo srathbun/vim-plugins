@@ -266,12 +266,12 @@ augroup omnifunc
 	autocmd FileType *
 	\ if &omnifunc != '' |
 	\   call SuperTabChain(&omnifunc, "<c-p>") |
-	\   call SuperTabSetDefaultCompletionType("context") |
+	\   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
 	\ endif
 augroup END
 endif
 
-	"\   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+"\   call SuperTabSetDefaultCompletionType("context") |
 " make autocomplete more like an IDE
 set completeopt=longest,menuone,preview
 "set complete=.,w,b,u,t,i,k
