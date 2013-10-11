@@ -11,7 +11,7 @@ call extend(g:pathogen_disabled, ['dbext', 'headlights', 'winmanager', 'slimv', 
 " for some reason the csscolor plugin is very slow when run on the terminal
 " but not in GVim, so disable it if no GUI is running
 if !has('gui_running')
-    call add(g:pathogen_disabled, 'csscolor')
+	call add(g:pathogen_disabled, 'csscolor')
 endif
 
 call pathogen#infect()
@@ -29,7 +29,7 @@ function! Indenting(indent, what, cols)
   let result = substitute(a:indent, spccol, '\t', 'g')
   let result = substitute(result, ' \+\ze\t', '', 'g')
   if a:what == 1
-    let result = substitute(result, '\t', spccol, 'g')
+	let result = substitute(result, '\t', spccol, 'g')
   endif
   return result
 endfunction
@@ -146,14 +146,14 @@ set scrolloff=3
 
 "Spell check
 function! ToggleSpell()
-        if !exists("b:spell")
-           setlocal spell spelllang=en
+		if !exists("b:spell")
+		   setlocal spell spelllang=en
 	   setlocal spellsuggest=9 " show only 9 suggestions for misspelled words
-           let b:spell = 1
-        else
-           setlocal nospell
-           unlet b:spell
-        endif
+		   let b:spell = 1
+		else
+		   setlocal nospell
+		   unlet b:spell
+		endif
 endfunction
 
 "if &t_Co == 256
@@ -199,55 +199,55 @@ set history=100
 " Function to disable the match paren plugin for remote file editing
 " It is unknown why this causes vim to run slowly
 function! s:ToggleMatchParen()
-        if exists("g:loaded_matchparen")
-                :NoMatchParen
-                :echo 'MatchParen plugin turned off'
-        else
-                :DoMatchParen
-                :echo 'MatchParen plugin turned on'
-        endif
+		if exists("g:loaded_matchparen")
+				:NoMatchParen
+				:echo 'MatchParen plugin turned off'
+		else
+				:DoMatchParen
+				:echo 'MatchParen plugin turned on'
+		endif
 endfunction 
 
 let g:NotEditingRemotely = 1
 
 function! s:ToggleRemoteFile()
-    if exists("g:NotEditingRemotely")
-        " Disable the matchparen.vim plugin"
-        :NoMatchParen
+	if exists("g:NotEditingRemotely")
+		" Disable the matchparen.vim plugin"
+		:NoMatchParen
 
-        " Turn off detection of the type of file"
-        filetype off
+		" Turn off detection of the type of file"
+		filetype off
 
-        " Disable the netrwPlugin.vim"
-        au! Network
-        au! FileExplorer
+		" Disable the netrwPlugin.vim"
+		au! Network
+		au! FileExplorer
 
-        " Remove tag scanning (t) and included file scanning (i)"
-        set complete=.,w,b,u,k
+		" Remove tag scanning (t) and included file scanning (i)"
+		set complete=.,w,b,u,k
 
-        " Remove these autocommands which were added by vimBallPlugin.vim"
-        au! BufEnter *.vba
-        au! BufEnter *.vba.gz
-        au! BufEnter *.vba.bz2
-        au! BufEnter *.vba.zip
+		" Remove these autocommands which were added by vimBallPlugin.vim"
+		au! BufEnter *.vba
+		au! BufEnter *.vba.gz
+		au! BufEnter *.vba.bz2
+		au! BufEnter *.vba.zip
 
-        unlet g:NotEditingRemotely
+		unlet g:NotEditingRemotely
 
-        :echo 'Remote Edit mode turned on'
-    else
-        " Enable the matchparen.vim plugin"
-        :DoMatchParen
+		:echo 'Remote Edit mode turned on'
+	else
+		" Enable the matchparen.vim plugin"
+		:DoMatchParen
 
-        " Turn on detection of files"
-        filetype on
+		" Turn on detection of files"
+		filetype on
 
-        " Add back in tag scanning (t) and included file scanning (i)"
-        set complete=.,w,b,u,t,i,k
+		" Add back in tag scanning (t) and included file scanning (i)"
+		set complete=.,w,b,u,t,i,k
 
-        let g:NotEditingRemotely = 1
+		let g:NotEditingRemotely = 1
 
-        :echo 'Remote Edit mode turned off'
-    endif
+		:echo 'Remote Edit mode turned off'
+	endif
 endfunction
 
 command! -nargs=0 ToggleRemoteFile call s:ToggleRemoteFile()
@@ -461,3 +461,25 @@ let g:BASH_Ctrl_j   = 'off'
 let g:BASH_AuthorName   = 'Spencer Rathbun'
 let g:BASH_Email        = 'srathbun@riverainc.com'
 let g:BASH_Company      = 'Rivera Group Inc.'
+
+" ConqueTerm settings
+let g:ConqueTerm_ToggleKey = '<F7>'
+let g:ConqueTerm_SendVisKey = '<F12>'
+
+function MyConqueStartup(term)
+	" set buffer syntax using the name of the program currently running
+	let syntax_associations = { 'ipython': 'python', 'irb': 'ruby', 'node': 'javascript' }
+
+	if has_key(syntax_associations, a:term.program_name)
+		execute 'setlocal syntax=' . syntax_associations[a:term.program_name]
+		let g:ConqueTerm_Syntax = syntax_associations[a:term.program_name]
+		let g:ConqueTerm_PromptRegex = '^>\+'
+		let g:ConqueTerm_FastMode = 1
+	else
+		execute 'setlocal syntax=' . a:term.program_name
+	endif
+	" shrink window height to 10 rows
+	resize 10
+endfunction
+
+call conque_term#register_function('after_startup', 'MyConqueStartup')
