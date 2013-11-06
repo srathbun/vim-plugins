@@ -105,7 +105,7 @@ snippet skel
 	// ${1:Classname}
 	/*jshint es5:true*/
 	/*globals console:true Array:true*/
-	var jsext = require("jsext"),
+	var jsext = require("jsext").install(),
 		console = new jsext.Console();
 
 	var ${2:reqItems} = require("$2");

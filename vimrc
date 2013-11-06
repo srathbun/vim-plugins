@@ -448,13 +448,13 @@ nnoremap <buffer> <Leader>tR :TernRename<CR>
 " let g:slimv_swank_cmd = '!osascript -e "tell application \"Terminal\" to do script \"node ~/git/swank-js/swank.js\""'
 let g:slime_target = "tmux"
 let g:slime_no_mappings = 1
-xmap <leader>s <Plug>SlimeRegionSend
-nmap <leader>s <Plug>SlimeMotionSend
-nmap <leader>ss <Plug>SlimeLineSend
+"xmap <leader>s <Plug>SlimeRegionSend
+"nmap <leader>s <Plug>SlimeMotionSend
+"nmap <leader>ss <Plug>SlimeLineSend
 
-xmap <leader>e <Plug>SlimeRegionEval
-nmap <leader>e <Plug>SlimeMotionEval
-nmap <leader>ee <Plug>SlimeLineEval
+"xmap <leader>e <Plug>SlimeRegionEval
+"nmap <leader>e <Plug>SlimeMotionEval
+"nmap <leader>ee <Plug>SlimeLineEval
 
 " bashsupport settings
 let g:BASH_Ctrl_j   = 'off'
