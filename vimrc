@@ -388,7 +388,9 @@ let g:syntastic_mode_map = { 'mode': 'active',
 						   \ 'active_filetypes': ['ruby', 'php', 'js', 'sh'],
 						   \ 'passive_filetypes': ['puppet', 'python'] }
 
-let g:syntastic_quiet_warnings=0
+" this was eating my jshint warnings
+"let g:syntastic_quiet_messages = {'level': 'warnings'}
+
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 
 function! FindRequire(name)
