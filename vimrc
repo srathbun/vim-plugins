@@ -402,7 +402,7 @@ endfunction
 augroup jsopts
 	autocmd!
 	au FileType javascript set dictionary+=$HOME/.vim/bundle/node-dict/dict/node.dict
-	au FileType javascript setlocal equalprg=/usr/local/share/npm/bin/js-beautify\ -f\ -\ -q\ -t\ -j\ -w\ 140\ --good-stuff\ -b\ \"end-expand\"
+	au FileType javascript setlocal equalprg=/usr/local/share/npm/bin/js-beautify\ -f\ -\ -q\ -t\ -j\ --good-stuff\ -b\ \"collapse\"
 	au FileType javascript set suffixesadd=.js,.json
 	au FileType javascript set includeexpr=FindRequire(v:fname)
 	au FileType javascript call tern#Enable()
@@ -485,3 +485,14 @@ function MyConqueStartup(term)
 endfunction
 
 call conque_term#register_function('after_startup', 'MyConqueStartup')
+
+
+" drag in visual mode options
+vmap  <expr>  <LEFT>   DVB_Drag('left')
+vmap  <expr>  <RIGHT>  DVB_Drag('right')
+vmap  <expr>  <DOWN>   DVB_Drag('down')
+vmap  <expr>  <UP>     DVB_Drag('up')
+vmap  <expr>  D        DVB_Duplicate()
+
+" Remove any introduced trailing whitespace after moving...
+let g:DVB_TrimWS = 1
