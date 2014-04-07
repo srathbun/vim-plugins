@@ -7,6 +7,7 @@ if !exists("g:pathogen_disabled")
 	let g:pathogen_disabled = []
 endif
 call extend(g:pathogen_disabled, ['dbext', 'headlights', 'winmanager', 'slimv', 'psl', 'puppet', 'drawit', 'vim-taglist-plus', 'tagbar'])
+call extend(g:pathogen_disabled, ['vis', 'vimtodo', 'vimPdb', 'vim-slime', 'vim-dochub', 'project', 'command-t', 'ack'])
 
 " for some reason the csscolor plugin is very slow when run on the terminal
 " but not in GVim, so disable it if no GUI is running
@@ -302,15 +303,8 @@ let winManagerWindowLayout = 'FileExplorer|TagList'
 "match OverLength /\%160v.\+/
 
 " Set up python mode settings
-let g:pymode_lint = 0
-let g:pymode_rope = 0
-let g:pymode_lint_checker = 'pyflakes'
-"let g:pymode_lint_config = 'c:/Program Files (x86)/vim/pylint.rc'
-let g:pymode_options_indent = 0
-let g:pymode_options_other = 0
-let g:pymode_options_fold = 0
-let g:pymode_rope_guess_project = 0
-"let g:pydoc = 'c:/Python27/lib/pydoc.py'
+let g:pymode_indent = 0
+let g:pymode_rope_lookup_project = 0
 
 " Alternate python syntax highlighting options
 highlight InheritUnderlined ctermfg=118 cterm=underline guifg=#1FF07A gui=underline
@@ -386,7 +380,7 @@ let g:syntastic_auto_loc_list=1
 let g:syntastic_loc_list_height=6
 let g:syntastic_mode_map = { 'mode': 'active',
 						   \ 'active_filetypes': ['ruby', 'php', 'js', 'sh'],
-						   \ 'passive_filetypes': ['puppet', 'python'] }
+						   \ 'passive_filetypes': ['puppet'] }
 
 " this was eating my jshint warnings
 "let g:syntastic_quiet_messages = {'level': 'warnings'}
