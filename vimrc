@@ -305,6 +305,7 @@ let winManagerWindowLayout = 'FileExplorer|TagList'
 " Set up python mode settings
 let g:pymode_indent = 0
 let g:pymode_rope_lookup_project = 0
+let g:pymode_lint_ignore = "W191,E251,E203,E221,E126,E128"
 
 " Alternate python syntax highlighting options
 highlight InheritUnderlined ctermfg=118 cterm=underline guifg=#1FF07A gui=underline
@@ -378,14 +379,33 @@ let g:syntastic_enable_balloons = 1
 let g:syntastic_auto_loc_list=1
 
 let g:syntastic_loc_list_height=6
+" python is passive here because pymode does checks
 let g:syntastic_mode_map = { 'mode': 'active',
 						   \ 'active_filetypes': ['ruby', 'php', 'js', 'sh'],
-						   \ 'passive_filetypes': ['puppet'] }
+						   \ 'passive_filetypes': ['puppet', 'python'] }
 
 " this was eating my jshint warnings
 "let g:syntastic_quiet_messages = {'level': 'warnings'}
 
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+
+" html syntax options
+" point html tidy at the brew version
+let g:syntastic_html_tidy_exec = '/usr/local/bin/tidy'
+let g:syntastic_html_tidy_blocklevel_tags = [
+\ 'alert'
+\ ]
+let g:syntastic_html_tidy_inline_tags = [
+\ ]
+let g:syntastic_html_tidy_empty_tags = [
+\ ]
+let g:syntastic_html_tidy_ignore_errors = [
+\   ' proprietary attribute "ng-',
+\   ' proprietary attribute "ui-view',
+\   ' proprietary attribute "on',
+\   ' proprietary attribute "valid-json',
+\   '<div> proprietary attribute "src'
+\ ]
 
 function! FindRequire(name)
 	let l:first = 'process.stdout.write(require.resolve("'
@@ -406,6 +426,7 @@ augroup jsopts
 	if v:shell_error != 8
 		au FileType javascript let g:syntastic_javascript_jshint_exe = s:jshintLocation
 	endif
+	let g:used_javascript_libs = 'jquery,angularjs,angularui'
 augroup END
 
 " search for a tags file in the current dir, looking recursively up towards
