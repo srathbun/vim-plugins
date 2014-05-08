@@ -67,3 +67,6 @@
 [submodule "vimfiles/bundle/javascript-libraries-syntax"]
 	path = vimfiles/bundle/javascript-libraries-syntax
 	url = https://github.com/othree/javascript-libraries-syntax.vim
+[submodule "vimfiles/bundle/slimv"]
+	path = vimfiles/bundle/slimv
+	url = https://github.com/kovisoft/slimv
