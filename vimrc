@@ -6,7 +6,7 @@ set nocompatible
 if !exists("g:pathogen_disabled")
 	let g:pathogen_disabled = []
 endif
-call extend(g:pathogen_disabled, ['dbext', 'headlights', 'winmanager', 'slimv', 'psl', 'puppet', 'drawit', 'vim-taglist-plus', 'tagbar'])
+call extend(g:pathogen_disabled, ['dbext', 'headlights', 'winmanager',  'psl', 'puppet', 'drawit', 'vim-taglist-plus', 'tagbar'])
 call extend(g:pathogen_disabled, ['vis', 'vimtodo', 'vimPdb', 'vim-slime', 'vim-dochub', 'project', 'command-t', 'ack'])
 
 " for some reason the csscolor plugin is very slow when run on the terminal
@@ -474,6 +474,11 @@ nnoremap <buffer> <Leader>tR :TernRename<CR>
 " SWANK settings
 " not working
 " let g:slimv_swank_cmd = '!osascript -e "tell application \"Terminal\" to do script \"node ~/git/swank-js/swank.js\""'
+" note that for racket, we alsow need https://github.com/dkvasnicka/swank-racket
+" au BufNewFile,BufRead,BufReadPost *.rkt,*.rktl,*.rktd set filetype=scheme
+let g:slimv_swank_scheme = '!osascript -e "tell application \"Terminal\" to do script \"~/bin/racket ~/racket/swank-racket/server.rkt\""'
+let g:slimv_repl_split = 2
+
 let g:slime_target = "tmux"
 let g:slime_no_mappings = 1
 "xmap <leader>s <Plug>SlimeRegionSend
