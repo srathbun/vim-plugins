@@ -393,7 +393,9 @@ let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 " point html tidy at the brew version
 let g:syntastic_html_tidy_exec = '/usr/local/bin/tidy'
 let g:syntastic_html_tidy_blocklevel_tags = [
-\ 'alert'
+\ 'alert',
+\ 'tabset',
+\ 'tab'
 \ ]
 let g:syntastic_html_tidy_inline_tags = [
 \ ]
@@ -427,6 +429,15 @@ augroup jsopts
 		au FileType javascript let g:syntastic_javascript_jshint_exe = s:jshintLocation
 	endif
 	let g:used_javascript_libs = 'jquery,angularjs,angularui'
+augroup END
+
+"function! TidyAndRetab(<line1>,<line2>,0,<q-args>)
+	"call equalprg
+	"call Space2Tab
+"endfunction
+"command! -nargs=? -range=% Tidy call TidyAndRetab(<line1>,<line2>,0,<q-args>)
+augroup html
+	au FileType html setlocal equalprg=/usr/local/bin/tidy\ -utf8\ -i\ -q\ -config\ ~/.vim/bundle/extras/tidy.conf
 augroup END
 
 " search for a tags file in the current dir, looking recursively up towards
