@@ -476,7 +476,7 @@ nnoremap <buffer> <Leader>tR :TernRename<CR>
 " let g:slimv_swank_cmd = '!osascript -e "tell application \"Terminal\" to do script \"node ~/git/swank-js/swank.js\""'
 " note that for racket, we alsow need https://github.com/dkvasnicka/swank-racket
 " au BufNewFile,BufRead,BufReadPost *.rkt,*.rktl,*.rktd set filetype=scheme
-let g:slimv_swank_scheme = '!osascript -e "tell application \"Terminal\" to do script \"~/bin/racket ~/racket/swank-racket/server.rkt\""'
+let g:slimv_swank_cmd = '!osascript -e "tell application \"Terminal\" to do script \"~/bin/racket ~/racket/swank-racket/server.rkt\""'
 let g:slimv_repl_split = 2
 
 let g:slime_target = "tmux"
