@@ -455,7 +455,11 @@ augroup END
 highlight CursorLine ctermbg=8 cterm=NONE
 
 nmap <leader>l <Plug>TaskList
+" location/error list mappings
 nmap <leader>c :cclose<CR>:lclose<CR>
+nmap <leader>n :cn<CR>
+nmap <leader>p :cp<CR>
+
 " yank to clipboard
 noremap <leader>y "*y
 
