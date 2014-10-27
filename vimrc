@@ -6,7 +6,7 @@ set nocompatible
 if !exists("g:pathogen_disabled")
 	let g:pathogen_disabled = []
 endif
-call extend(g:pathogen_disabled, ['dbext', 'headlights', 'winmanager',  'psl', 'puppet', 'drawit', 'vim-taglist-plus', 'tagbar'])
+call extend(g:pathogen_disabled, ['dbext', 'headlights', 'winmanager',  'psl', 'puppet', 'drawit', 'vim-taglist-plus'])
 call extend(g:pathogen_disabled, ['vis', 'vimtodo', 'vimPdb', 'vim-slime', 'vim-dochub', 'project', 'command-t', 'ack'])
 
 " for some reason the csscolor plugin is very slow when run on the terminal
@@ -423,12 +423,18 @@ augroup jsopts
 	au FileType javascript set includeexpr=FindRequire(v:fname)
 	au FileType javascript call tern#Enable()
 	au FileType javascript au BufWritePre <buffer> :%s/\s\+$//e
+	au BufNewFile,BufRead *.json set ft=javascript
 	let s:script = 'var p = require.resolve("jshint"); var l = p.indexOf("jshint"); process.stdout.write(p.substr(0, l)+"jshint/bin/jshint");'
 	let s:jshintLocation = system("node -e '" . s:script . "'")
 	if v:shell_error != 8
 		au FileType javascript let g:syntastic_javascript_jshint_exe = s:jshintLocation
 	endif
 	let g:used_javascript_libs = 'jquery,angularjs,angularui'
+augroup END
+
+augroup markdown
+	autocmd!
+	au BufNewFile,BufRead *.md set ft=markdown
 augroup END
 
 "function! TidyAndRetab(<line1>,<line2>,0,<q-args>)
