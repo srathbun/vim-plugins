@@ -117,7 +117,6 @@ else
 	colorscheme elflord
 endif
 
-
 " turn on autoindent
 set ai
 " these may conflict
@@ -214,6 +213,7 @@ set completeopt=longest,menuone
 set autochdir
 " set the viminfo settings
 set viminfo='50,<1000,s100,:100,h,/100,@100,!,%,nC:/vim/viminfo 
+set history=100
 
 
 " Function to disable the match paren plugin for remote file editing

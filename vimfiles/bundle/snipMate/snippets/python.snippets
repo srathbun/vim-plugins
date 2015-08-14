@@ -147,6 +147,7 @@ snippet table
 		__tablename__ = '$1'
 		id = id_column()
 		${2}
+<<<<<<< Updated upstream
 
 		def __init__(self, rec, id=None):
 			if id:
@@ -155,3 +156,5 @@ snippet table
 snippet tbl
 	class ${1:newtable}(Base):
 		__table__ = metadata.tables['$1']
+=======
+>>>>>>> Stashed changes
