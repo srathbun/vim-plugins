@@ -3,6 +3,7 @@ source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
 "behave mswin
 " set up pathogen
+au GUIEnter * simalt ~x
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
@@ -73,6 +74,8 @@ set ea
 " turn on persistent undo
 set undodir=C:\\Vim\\undoFiles
 set undofile 
+" have backup files and swap files saved to a temp folder
+set backupdir=C:\\temp\\vimtmp
 " turn on syntax highlighting
 syntax on
 autocmd BufRead,BufNewFile *.psl setfiletype psl
@@ -82,20 +85,38 @@ autocmd BufRead,BufNewFile *.plb setfiletype psl
 " autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
 " autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 " Deprecated in favor of pylint
-" autocmd BufRead *.py set makeprg=pylint\ -i\ y\ --rcfile=pylint.rc\ %
-" autocmd BufRead *.py set efm=%+P[%f],%t%n:\ %#%l:%m,%Z,%+IYour\ code%m,%Z,%-G%.%#
-" Deprecated in favor of python mode plugin
+autocmd BufRead *.py set makeprg=pylint\ --reports=n\ --rcfile=pylint.rc\ --output-format=parseable\ \"%:p\"
+autocmd BufRead *.py set efm=%A%f:%l:\ [%t%.%#]\ %m,%Z%p^^,%-C%.%#
+"autocmd BufRead *.py set efm=%+P[%f],%t%n:\ %#%l:%m,%Z,%+IYour\ code%m,%Z,%-G%.%#
 " use psl as 'make' program, recognizing error output for quickfix buffer
 autocmd BufRead *.psl set makeprg=runtime\ %:t:r.pjb\ -u
 autocmd BufRead *.psl set errorformat=%.%#\<%f\ -\ %l\\,%c\>%m,\<psl\>\ :\ Runtime\ error:\ in\ \"%f\"\ line\ %l\ %m
+" Automatically open, but do not go to (if there are errors) the quickfix /
+" location list window, or close it when is has become empty.
+"
+" Note: Must allow nesting of autocmds to enable any customizations for quickfix
+" buffers.
+" Note: Normally, :cwindow jumps to the quickfix window if the command opens it
+" (but not if it's already open). However, as part of the autocmd, this doesn't
+" seem to happen.
+autocmd QuickFixCmdPost [^l]* nested cwindow
+
 
 " turn on line numbers
 set nu
 set backspace=indent,eol,start
-"colorscheme darkblue
-colorscheme zenburn
-set guifont=Consolas:h11:cANSI
-set background=dark
+
+"colorscheme setup for gui or windows prompt
+if has("gui_running")
+	set t_Co=256
+	colorscheme zenburn
+	set background=dark
+	set guifont=Consolas:h11:cANSI
+else
+	set background=light
+	colorscheme elflord
+endif
+
 
 " turn on autoindent
 set ai
@@ -188,15 +209,6 @@ set completeopt=longest,menuone
 " keep menu item always highlighted by simulating <Up> on pu visible
 "inoremap <expr> <C-p> pumvisible() ? '<C-p>' :	\ '<C-p><C-r>=pumvisible() ? "\<lt>Up>" : ""<CR>'
 
-" mini buf explorer setup
-"let g:miniBufExplMapWindowNavVim = 1
-"let g:miniBufExplMapWindowNavArrows = 1
-"let g:miniBufExplMapCTabSwitchBufs = 1
-"let g:miniBufExplModSelTarget = 1
-"let g:miniBufExplSplitBelow=0
-"let g:miniBufExplorerDebugLevel = 0
-"let g:miniBufExplorerDebugMode = 0
-
 "set vim to automatically change to the directory of the file in the current
 "buffer
 set autochdir
@@ -277,7 +289,8 @@ autocmd BufNewFile,BufRead *.psl compiler psl
 "match OverLength /\%160v.\+/
 
 " Set up python mode settings
-let g:pymode_lint_config = 'pylint.rc'
+let g:pymode_lint_checker = 'pyflakes'
+let g:pymode_lint_config = 'c:/Program Files (x86)/vim/pylint.rc'
 let g:pymode_options_indent = 0
 let g:pymode_options_other = 0
 let g:pymode_options_fold = 0
@@ -285,5 +298,12 @@ let g:pymode_rope_guess_project = 0
 let g:pydoc = 'c:/Python27/lib/pydoc.py'
 
 " Alternate python syntax highlighting options
-highlight InheritUnderlined ctermfg=118 cterm=underline guifg=#1FF07A gui=underline
 let python_highlight_all = 1
+highlight InheritUnderlined ctermfg=118 cterm=underline guifg=#1FF07A gui=underline
+highlight Operator          ctermfg=186 cterm=none guifg=#c9c484 gui=none 
+highlight pythonBuiltin     ctermfg=88 cterm=none guifg=#d1a243 gui=none 
+au GUIEnter * highlight InheritUnderlined ctermfg=118 cterm=underline guifg=#1FF07A gui=underline
+au GUIEnter * highlight Operator          ctermfg=186 cterm=none guifg=#c9c484 gui=none 
+au GUIEnter * highlight pythonBuiltin     ctermfg=88 cterm=none guifg=#d1a243 gui=none 
+
+let maplocalleader = ","
