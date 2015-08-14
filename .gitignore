@@ -33,3 +33,7 @@ nosetests.xml
 .mr.developer.cfg
 
 *~
+
+.VimballRecord
+.netrwhist
+tags

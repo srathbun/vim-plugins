@@ -1,15 +1,66 @@
-[submodule "vimfiles/bundle/fugitive"]
-	path = vimfiles/bundle/fugitive
-	url = http://github.com/tpope/vim-fugitive.git
-[submodule "vimfiles/bundle/python-mode"]
-	path = vimfiles/bundle/python-mode
-	url = git://github.com/klen/python-mode.git
-[submodule "vimfiles/bundle/ack"]
-	path = vimfiles/bundle/ack
-	url = git://github.com/mileszs/ack.vim.git
-[submodule "vimfiles/bundle/nerdcommenter"]
-	path = vimfiles/bundle/nerdcommenter
-	url = git://github.com/scrooloose/nerdcommenter.git
+[submodule "vimfiles/bundle/syntastic"]
+	path = vimfiles/bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
+[submodule "vimfiles/bundle/tagbar"]
+	path = vimfiles/bundle/tagbar
+	url = git://github.com/majutsushi/tagbar.git
+[submodule "vimfiles/bundle/node-dict"]
+	path = vimfiles/bundle/node-dict
+	url = git://github.com/guileen/vim-node.git
+[submodule "vimfiles/bundle/node-complete"]
+	path = vimfiles/bundle/node-complete
+	url = git://github.com/myhere/vim-nodejs-complete.git
+[submodule "vimfiles/bundle/snipmate-nodejs"]
+	path = vimfiles/bundle/snipmate-nodejs
+	url = git://github.com/jamescarr/snipmate-nodejs.git
+[submodule "vimfiles/bundle/vim-json"]
+	path = vimfiles/bundle/vim-json
+	url = https://github.com/elzr/vim-json
+[submodule "vimfiles/bundle/vim-taglist-plus"]
+	path = vimfiles/bundle/vim-taglist-plus
+	url = https://github.com/johnbintz/vim-taglist-plus
+[submodule "vimfiles/bundle/puppet"]
+	path = vimfiles/bundle/puppet
+	url = git://github.com/rodjek/vim-puppet.git
+[submodule "vimfiles/bundle/vim-javascript"]
+	path = vimfiles/bundle/vim-javascript
+	url = https://github.com/pangloss/vim-javascript.git
+[submodule "vimfiles/bundle/vim-dochub"]
+	path = vimfiles/bundle/vim-dochub
+	url = https://github.com/stephenmckinney/vim-dochub.git
+[submodule "vimfiles/bundle/vim-nodejs-complete"]
+	path = vimfiles/bundle/vim-nodejs-complete
+	url = https://github.com/myhere/vim-nodejs-complete.git
+[submodule "vimfiles/bundle/supertab"]
+	path = vimfiles/bundle/supertab
+	url = https://github.com/ervandew/supertab.git
+[submodule "vimfiles/bundle/nerdtree"]
+	path = vimfiles/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "vimfiles/bundle/bash-support"]
+	path = vimfiles/bundle/bash-support
+	url = https://github.com/vim-scripts/bash-support.vim.git
+[submodule "vimfiles/bundle/vim-slime"]
+	path = vimfiles/bundle/vim-slime
+	url = https://github.com/srathbun/vim-slime.git
+[submodule "vimfiles/bundle/tern"]
+	path = vimfiles/bundle/tern
+	url = https://github.com/marijnh/tern_for_vim.git
+[submodule "vimfiles/bundle/splice"]
+	path = vimfiles/bundle/splice
+	url = https://github.com/sjl/splice.vim.git
+[submodule "vimfiles/bundle/gundo"]
+	path = vimfiles/bundle/gundo
+	url = https://github.com/sjl/gundo.vim.git
 [submodule "vimfiles/bundle/vim-surround"]
 	path = vimfiles/bundle/vim-surround
-	url = git://github.com/tpope/vim-surround.git
+	url = https://github.com/tpope/vim-surround.git
+[submodule "vimfiles/bundle/javascript-libraries-syntax"]
+	path = vimfiles/bundle/javascript-libraries-syntax
+	url = https://github.com/othree/javascript-libraries-syntax.vim
+[submodule "vimfiles/bundle/slimv"]
+	path = vimfiles/bundle/slimv
+	url = https://github.com/kovisoft/slimv
+[submodule "vimfiles/bundle/vim-racket"]
+	path = vimfiles/bundle/vim-racket
+	url = https://github.com/wlangstroth/vim-racket

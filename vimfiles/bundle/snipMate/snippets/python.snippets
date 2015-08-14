@@ -129,6 +129,11 @@ snippet parser
 	args = parser.parse_args()
 snippet arg
 	parser.add_argument('--${1}', type=${2:str}, default='${3}', help='${4}')
+# globbing
+snippet globs
+	for globFile in ${1:infiles}:
+		for f in glob(globFile):
+			with open(f,'rb') as currFile:
 # perl autoVivification
 snippet autoviv
 	class AutoVivification(dict):

@@ -1,0 +1,347 @@
+*axiom.txt*      For Vim version 7.3.  Last change: 2012 Jan 20
+
+
+          VIM TOOLS FOR M[UMPS]/GT.M    by David Wicksell
+
+
+Package:       Axiom
+File:          axiom.txt
+Summary:       Vim help documentation
+Maintainer:    David Wicksell
+Version:       0.20.11
+
+Written by David Wicksell <dlw@linux.com>
+Copyright © 2011,2012 Fourth Watch Software, LC
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License (AGPL)
+as published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see http://www.gnu.org/licenses/.
+
+
+Utility package for the M[UMPS]/GT.M programming language              *axiom*
+
+1. Syntax file for GT.M              |axiom-syntax|
+2. Datetime stamp                    |axiom-datetime|
+3. Dump the contents of a global     |axiom-globaldump|
+4. Jump to labels in routines        |axiom-mtags|
+5. Information status line           |axiom-mstatus|
+6. Compile the current routine       |axiom-mcompile|
+
+==============================================================================
+1. Syntax file for GT.M                                         *axiom-syntax*
+
+Summary ~
+
+The Axiom utility package for MUMPS/GT.M contains a syntax highlighting
+file. It should work in Vim version 5.0 and above.
+
+It has the ability to define comment blocks and dotted-do blocks in MUMPS as
+a syntax region, and then transparently fold them, to give you a better view
+of the larger context of the routine. There is a key mapping, bound to
+CTRL-N, which will cycle through several modes for syntax folding.
+
+In order to use syntax folding effectively, you should learn the folding
+commands that are built in to Vim. For more information, see |fold-commands|.
+
+Installation ~
+
+It is called {mumps.vim} and in order to function properly, it should be
+installed in: >
+
+    ~/.vim/syntax/
+<
+The Axiom package comes with a script, called 'install', that does this
+automatically for you. But you've most likely already run this script or
+you probably wouldn't have this documentation included in your Vim help
+system.
+
+Additonal scripts ~
+
+The syntax file requires a script called {settings.vim} which should be
+installed in: >
+
+    ~/.vim/ftplugin/mumps/
+<
+It will be sourced automatically whenever you open up a file of type
+mumps. Again, the installation script provided with Axiom does this
+automatically. This script sets a few options needed by the syntax file
+in order to function properly. The options are set either locally to the
+buffer, or are reset when changing buffers to one that is not file of
+type mumps.
+
+                                                         *b:mumpsfoldingmode*
+
+There is a buffer variable, called {b:mumpsfoldingmode}, which controls
+the default syntax folding mode.
+
+The default mode is "none", and the other modes are "comment", "do", and
+"both".  The mode options do the following: "none" turns off syntax folding,
+"comment" turns on just comment folding, "do" turns on just dotted-do block
+folding, and "both" turns on both folding regions.
+
+Disclaimer ~
+
+Keep in mind that syntax highlighting relies upon regular expressions,
+and if you think regular expressions are the answer to your problem, you
+now have two problems. MUMPS is a difficult language to map with only
+regular expressions, so there are instances where you will be able to
+write invalid MUMPS code, and the syntax highlighting will not alert you
+to that fact. I will try to continue improving the syntax file, but for
+now, it is what it is.
+
+==============================================================================
+2. Datetime stamp                                             *axiom-datetime*
+
+Summary ~
+
+The Axiom package comes with an automatic datetime stamp function, which
+will imprint a new datetime stamp in a VISTA (Veterans Health Information
+Systems and Technology Architecture) SAC (Standards and Conventions)
+compliant way. There is a key mapping, bound to CTRL-H, that will toggle
+the stamp on or off. It is on by default.
+
+Installation ~
+
+The script is called {datetime.vim} and should be installed in: >
+
+    ~/.vim/ftplugin/mumps/
+<
+It will be installed in the right place automatically by the install script.
+
+==============================================================================
+3. Dump the contents of a global                            *axiom-globaldump*
+
+Summary ~
+
+The Axiom package comes with functionality to display, either in the current
+buffer, or in a horizontal or vertical split screen, the contents of a MUMPS
+global. It will display the data from the exact global reference under the
+cursor, or if there are variables in any of the subscript locations, it will
+display the data from all the possible values for that subscript.
+
+When opening a buffer containing a MUMPS/GT.M routine, a key mapping will
+be created, bound to CTRL-K, which will allow you to dump the contents of
+the global reference underneath the cursor. You should have your cursor on
+the '^' that begins the global reference, to ensure that you are getting
+the right reference.
+
+Installation ~
+
+The script is called {globaldump.vim} and should be installed in: >
+
+    ~/.vim/ftplugin/mumps/
+<
+It will be installed in the right place automatically by the install script.
+
+                                                                        *:ZWR*
+
+In addition to the key mapping for CTRL-K, the Axiom package provides a user
+defined ex command, called 'ZWR', which is used as follows:
+
+:ZWR {value}
+              {value} represents a MUMPS global reference
+              with or without subscripts. It is not
+              necessary to type the initial '^', nor to
+              quote or escape {value}.
+
+You may use the '*' and ':' wildcard characters with :ZWR. The '*' at the
+last subscript location will display the data for all the possible values
+for that subscript, as well as all the children of that subscript. The ':'
+at a particular subscript location will display the data for all the
+possible values for that subscript, but will not display any of the children
+of that subscript. You may supply a range with ':' and it will display all
+the possible values in that range. You may only use the '*' wildcard as the
+last subscript in the global reference. For more details, consult the GT.M
+documentation for the ZWRITE command. Here are some examples: >
+
+    :ZWR DD(*)
+    :ZWR DIC(:,0)
+    :ZWR DIC(4:7,0)
+    :ZWR VA(200,0,*)
+<
+                                                               *b:globalsplit*
+
+There is a buffer variable, called {b:globalsplit}, which controls whether
+a global dump is shown in a split screen, or in the current buffer. It
+defaults to a split screen and is defined in settings.vim.
+
+If {b:globalsplit} is set to 1, a global dump will write to a horizontal or
+vertical split screen, and you can navigate between the split screens via
+CTRL-W CTRL-W. For more information about split screens, see
+|opening-window|. When in this mode, while in a split screen, the key
+mapping for CTRL-K will now close the split screen, and remove the temporary
+file. In addition, in order to avoid messing with the tag stack while in
+the global screen, the key mappings for CTRL-] and CTRL-T will also close
+the split screen, and remove the temporary file, as will ':quit'.
+
+                                                                 *b:splittype*
+
+There is another buffer variable, called {b:splittype}, which controls
+whether a global dump is shown in a horizontal split screen, or in a vertical
+split screen. It defaults to a horizontal split screen and is defined in
+settings.vim.
+
+If {b:splittype} is set to "horizontal" or undefined, a global dump will write
+to a horizontal split screen. This is the default. If {b:splittype} is set to
+"vertical", then the split screen will be vertical. For more information
+about horizontal and vertical split screens, see |split|, |new-vertsplit|, and
+|vsplit|. If {b:globalsplit} is set to 0, then {b:splittype} is ignored.
+
+There are two more key mappings that make it more convenient to resize the
+split screen containg the contents of the global reference. While in the
+screen containing the global data, the comma key ',' will increase the size
+of the screen, and the period key '.' will decrease it. To reset the size of
+the split screens so that they are equal, use CTRL-W =. For more information
+about window commands, see |CTRL-W|.
+
+Disclaimer ~
+
+There may be bugs in the handling of global references. It is quite tricky.
+
+==============================================================================
+4. Jump to labels in routines                       *axiom-mtags* *axiom-tags*
+
+Summary ~
+
+When opening a buffer containing a MUMPS/GT.M routine, a key mapping will
+be created, bound to CTRL-], which will jump you to a line label in a MUMPS
+routine. Though a new key mapping is created, it is actually used to
+enable the use of the automatic 'ctags' functionality, built in to Vim. The
+built-in functionality is created for C and C-like languages, not MUMPS.
+
+The behavior, however, is the same as if you were navigating C code using
+'ctags' and a tag stack is created, allowing you to push new tags onto the
+stack with CTRL-], and pop tags off of the stack, going back to where you
+were previously, with CTRL-T. In addition to the key mapping for CTRL-],
+the Axiom package can leverage the built-in tags functionality of Vim.
+For example, you can use the :tag ex command to jump directly to any label
+in any MUMPS/GT.M routine. This includes the ability to leverage
+|cmdline-completion| to be able to search through every label in any
+MUMPS/GT.M routine. See |tags| for more information on how to use the tags
+functionality in Vim. See |ctags| and the documentation and man page for the
+'ctags' program.
+
+Note: You must create a tags file, called .mtags, in your home directory, or
+mtags in a working directory, in order to use the mtags functionality. In
+order to make this simple, there is an included script that will build the
+proper tags file for the mtags functionality, either manually, or preferrably
+it can be run daily as a cron job. See the man page for 'crontab', via: >
+
+    $ man crontab
+<
+Installation ~
+
+The script is called {mtags.vim} and should be installed in: >
+
+    ~/.vim/ftplugin/mumps/
+<
+                                           *axiom-mktags* *axiom-mtags-script*
+
+Supplied with the Axiom package is a shell script called 'mktags', which can
+be executed to create a proper tags file for the mtags functionality. Here are
+a few examples of how to run the 'mktags' command: >
+
+    $ mktags -g
+    $ mktags -ed directory
+    $ mktags -ld directory
+    $ mktags -l routine.m
+<
+For more information about the 'mktags' shell script, please read the man page
+supplied with the Axiom package, via: >
+
+    $ man mktags
+<
+Disclaimer ~
+
+There may be bugs in the handling of label references. It is quite tricky.
+
+==============================================================================
+5. Information status line                      *axiom-mstatus* *axiom-status*
+
+Summary ~
+
+The Axiom package contains functionality that will display a status bar at
+the bottom of the editing buffer, shown in reverse video, which shows where
+you are in the routine in the format of line_label+offset^routine: >
+
+    EN+6^DIC
+    SCREEN^DIR
+    GET1+3^DIQ
+<
+This is the format that GT.M will use to mark where an error has occurred
+in a stack trace. It will be easier to find where the error occurred with
+MStatus turned on.
+
+Installation ~
+
+The script is called {mstatus.vim} and should be installed in: >
+
+    ~/.vim/ftplugin/mumps/
+<
+It will be installed in the right place automatically by the install script.
+
+                                                                    *:MStatus*
+
+There is a user defined ex command, called 'MStatus', which will turn
+'MStatus' on or off, or enable or disable auto-updating. It is used as
+follows:
+
+:MStatus {value}
+                  {value} can be one of: on, off, update, or
+                  noupdate. Additionally you may supply a ?
+                  and 'MStatus' will give you a helpful reminder
+                  of what arguments it accepts.
+
+The first two options to 'MStatus' will turn it on or off. It defaults to on.
+In order to keep up with editing changes to the structure of the code, which
+should change the 'MStatus' information, you may also turn on auto-updating.
+Auto-updating is turned on with the update argument to 'MStatus', or off with
+the noupdate argument. Auto-updating is implemented as an autocmd which
+invokes the update command whenever the cursor moves. Auto-updating is turned
+off by default. For more information about the update command, see |update|.
+
+Disclaimer ~
+
+Turning on 'MStatus' can slow down editing on some systems, depending upon
+their resources, especially with auto-updating turned on as well.
+
+==============================================================================
+6. Compile the current routine                *axiom-mcompile* *axiom-compile*
+
+Summary ~
+
+The Axiom package contains the ability to compile the current routine in the
+editing buffer with GT.M, without leaving the buffer. It will automatically
+figure out where the routine's object file should be created or updated.
+
+Installation ~
+
+The script is called {mcompile.vim} and should be installed in: >
+
+    ~/.vim/ftplugin/mumps/
+<
+It will be installed in the right place automatically by the install script.
+
+                                                                   *:MCompile*
+
+There is a user defined ex command, called 'MCompile', that when invoked will
+compile the source code in the current buffer. If there are any syntax errors
+that can be determined at compile time, they will be displayed in the current
+buffer, giving you an opportunity to fix them and recompile. 'MCompile' does
+not take any arguments.
+
+==============================================================================
+I hope you enjoy the Axiom utility package for editing MUMPS/GT.M routines
+using the wonderful Vim editor. If you have any questions, concerns, feature
+requests, or bugs to report, please contact:
+
+    David Wicksell at <dlw@linux.com> ~

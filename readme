@@ -1,0 +1,7 @@
+*Mostly* cross platform vimrc and plugins. Default setup is for windows, to use with linux, follow these instructions.
+
+clone to ~/.vim/
+git checkout linux ( to get the linux branch )
+symlink ~/.vimrc to vimrc
+( uses ln -s vimrc ~/.vimrc )
+git submodule init && git submodule update --recursive --rebase --remote

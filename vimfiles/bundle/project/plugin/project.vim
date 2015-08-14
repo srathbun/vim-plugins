@@ -7,6 +7,9 @@
 " See documentation in accompanying help file
 " You may use this code in whatever way you see fit.
 
+" winmanager hooks
+"let g:Project_title = "[Project]"
+
 if exists('loaded_project') || &cp
   finish
 endif
