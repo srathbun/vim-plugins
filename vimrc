@@ -104,11 +104,11 @@ augroup END
 set nu
 set backspace=indent,eol,start
 
-colorscheme zenburn
 "set guifont=Consolas:h11:cANSI
 set guifont=Monoco:h11:cANSI
 set t_Co=256
 set background=dark
+colorscheme zenburn
 
 " turn on autoindent
 set ai
@@ -116,7 +116,7 @@ set ai
 "Turn on smart indent
 set smartindent
 set tabstop=4 "set tab character to 4 characters
-"set expandtab "turn tabs into whitespace
+set expandtab "turn tabs into whitespace
 set shiftwidth=4 "indent width for autoindent
 filetype indent on "indent depends on filetype
 
@@ -303,7 +303,7 @@ let winManagerWindowLayout = 'FileExplorer|TagList'
 "match OverLength /\%160v.\+/
 
 " Set up python mode settings
-let g:pymode_indent = 0
+let g:pymode_indent = 1
 let g:pymode_rope_lookup_project = 0
 let g:pymode_lint_ignore = "W191,E251,E203,E221,E126,E128"
 
@@ -418,7 +418,7 @@ endfunction
 augroup jsopts
 	autocmd!
 	au FileType javascript set dictionary+=$HOME/.vim/bundle/node-dict/dict/node.dict
-	au FileType javascript setlocal equalprg=/usr/local/share/npm/bin/js-beautify\ -f\ -\ -q\ -t\ -j\ --good-stuff\ -b\ \"collapse\"
+	au FileType javascript setlocal equalprg=/usr/local/bin/js-beautify\ -f\ -\ -q\ -s\ 2\ -j\ --good-stuff\ -b\ \"collapse\"
 	au FileType javascript set suffixesadd=.js,.json
 	au FileType javascript set includeexpr=FindRequire(v:fname)
 	au FileType javascript call tern#Enable()

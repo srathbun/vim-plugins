@@ -73,3 +73,6 @@
 [submodule "vimfiles/bundle/vim-racket"]
 	path = vimfiles/bundle/vim-racket
 	url = https://github.com/wlangstroth/vim-racket
+[submodule "vimfiles/bundle/vim-jinja"]
+	path = vimfiles/bundle/vim-jinja
+	url = https://github.com/lepture/vim-jinja.git
