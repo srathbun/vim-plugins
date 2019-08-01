@@ -64,6 +64,9 @@ set ruler
 " set mouse on for console
 set mouse=a
 
+" turn on modeline so that vim comments work to set tab/space for a file
+set modeline
+
 " turn on persistent undo
 set undodir=~/.undo
 set undofile 
@@ -304,8 +307,12 @@ let winManagerWindowLayout = 'FileExplorer|TagList'
 
 " Set up python mode settings
 let g:pymode_indent = 1
+let g:pymode_lint_ignore = "W191,E251,E203,E221,E126,E128,E501"
+let g:pymode_rope = 0
 let g:pymode_rope_lookup_project = 0
-let g:pymode_lint_ignore = "W191,E251,E203,E221,E126,E128"
+let g:pymode_rope_completion = 0
+let g:pymode_rope_complete_on_dot = 0
+let g:pymode_folding = 0
 
 " Alternate python syntax highlighting options
 highlight InheritUnderlined ctermfg=118 cterm=underline guifg=#1FF07A gui=underline
