@@ -305,7 +305,7 @@ let winManagerWindowLayout = 'FileExplorer|TagList'
 "highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 "match OverLength /\%160v.\+/
 let g:pymode_indent = 1
-let g:pymode_lint_ignore = "W191,E251,E203,E221,E126,E128,E501"
+let g:pymode_lint_ignore = ["W191","E251","E203","E221","E126","E128","E501"]
 let g:pymode_rope = 0
 let g:pymode_rope_lookup_project = 0
 let g:pymode_rope_completion = 0
@@ -435,10 +435,12 @@ augroup jsopts
 	au FileType javascript au BufWritePre <buffer> :%s/\s\+$//e
 	au BufNewFile,BufRead *.json set ft=javascript
 	let s:script = 'var p = require.resolve("jshint"); var l = p.indexOf("jshint"); process.stdout.write(p.substr(0, l)+"jshint/bin/jshint");'
-	let s:jshintLocation = system("node -e '" . s:script . "'")
-	if v:shell_error != 8
-		au FileType javascript let g:syntastic_javascript_jshint_exe = s:jshintLocation
-	endif
+    " Disabled because I do not seem to have node bits installed and do not
+    " need them at BV
+	"let s:jshintLocation = system("node -e '" . s:script . "'")
+	"if v:shell_error != 8
+	"au FileType javascript let g:syntastic_javascript_jshint_exe = s:jshintLocation
+	"ndif
 	let g:used_javascript_libs = 'jquery,angularjs,angularui'
 augroup END
 
