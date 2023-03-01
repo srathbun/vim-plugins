@@ -1,27 +1,27 @@
 [submodule "vimfiles/bundle/fugitive"]
 	path = vimfiles/bundle/fugitive
-	url = http://github.com/tpope/vim-fugitive.git
+	url = https://github.com/tpope/vim-fugitive.git
 [submodule "vimfiles/bundle/python-mode"]
 	path = vimfiles/bundle/python-mode
-	url = git://github.com/klen/python-mode.git
+	url = https://github.com/klen/python-mode.git
 [submodule "vimfiles/bundle/ack"]
 	path = vimfiles/bundle/ack
-	url = git://github.com/mileszs/ack.vim.git
+	url = https://github.com/mileszs/ack.vim.git
 [submodule "vimfiles/bundle/syntastic"]
 	path = vimfiles/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
 [submodule "vimfiles/bundle/tagbar"]
 	path = vimfiles/bundle/tagbar
-	url = git://github.com/majutsushi/tagbar.git
+	url = https://github.com/majutsushi/tagbar.git
 [submodule "vimfiles/bundle/node-dict"]
 	path = vimfiles/bundle/node-dict
-	url = git://github.com/guileen/vim-node.git
+	url = https://github.com/guileen/vim-node.git
 [submodule "vimfiles/bundle/node-complete"]
 	path = vimfiles/bundle/node-complete
-	url = git://github.com/myhere/vim-nodejs-complete.git
+	url = https://github.com/myhere/vim-nodejs-complete.git
 [submodule "vimfiles/bundle/snipmate-nodejs"]
 	path = vimfiles/bundle/snipmate-nodejs
-	url = git://github.com/jamescarr/snipmate-nodejs.git
+	url = https://github.com/jamescarr/snipmate-nodejs.git
 [submodule "vimfiles/bundle/vim-json"]
 	path = vimfiles/bundle/vim-json
 	url = https://github.com/elzr/vim-json
@@ -30,7 +30,7 @@
 	url = https://github.com/johnbintz/vim-taglist-plus
 [submodule "vimfiles/bundle/puppet"]
 	path = vimfiles/bundle/puppet
-	url = git://github.com/rodjek/vim-puppet.git
+	url = https://github.com/rodjek/vim-puppet.git
 [submodule "vimfiles/bundle/vim-javascript"]
 	path = vimfiles/bundle/vim-javascript
 	url = https://github.com/pangloss/vim-javascript.git
