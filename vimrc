@@ -8,6 +8,7 @@ if !exists("g:pathogen_disabled")
 endif
 call extend(g:pathogen_disabled, ['dbext', 'headlights', 'winmanager',  'psl', 'puppet', 'drawit', 'vim-taglist-plus'])
 call extend(g:pathogen_disabled, ['vis', 'vimtodo', 'vimPdb', 'vim-slime', 'vim-dochub', 'project', 'command-t', 'ack'])
+call extend(g:pathogen_disabled, ['syntastic'])
 
 " for some reason the csscolor plugin is very slow when run on the terminal
 " but not in GVim, so disable it if no GUI is running
@@ -18,7 +19,7 @@ endif
 call pathogen#infect()
 "call pathogen#runtime_append_all_bundles()
 " use this to update helptags
-"call pathogen#helptags()
+call pathogen#helptags()
 
 set diffopt+=iwhite
 
@@ -126,7 +127,7 @@ filetype indent on "indent depends on filetype
 "Informative status line
 set statusline=%F%m%r%h%w\ [TYPE=%Y\ %{&ff}]\ [%l/%L\ (%p%%)]
 set statusline+=\ %#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 "Enable indent folding
@@ -379,45 +380,45 @@ nmap <F8> :Gstatus<CR>
 set pastetoggle=<F9>
 
 " Syntastic options
-let g:syntastic_check_on_open=1
-let g:syntastic_enable_signs=1
+"let g:syntastic_check_on_open=1
+"let g:syntastic_enable_signs=1
 
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
+"let g:syntastic_error_symbol='✗'
+"let g:syntastic_warning_symbol='⚠'
 
-let g:syntastic_enable_balloons = 1
-let g:syntastic_auto_loc_list=1
+"let g:syntastic_enable_balloons = 1
+"let g:syntastic_auto_loc_list=1
 
-let g:syntastic_loc_list_height=6
+"let g:syntastic_loc_list_height=6
 " python is passive here because pymode does checks
-let g:syntastic_mode_map = { 'mode': 'active',
-						   \ 'active_filetypes': ['ruby', 'php', 'js', 'sh'],
-						   \ 'passive_filetypes': ['puppet', 'python'] }
+"let g:syntastic_mode_map = { 'mode': 'active',
+						   "\ 'active_filetypes': ['ruby', 'php', 'js', 'sh'],
+						   "\ 'passive_filetypes': ['puppet', 'python'] }
 
 " this was eating my jshint warnings
 "let g:syntastic_quiet_messages = {'level': 'warnings'}
 
-let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+"let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 
 " html syntax options
 " point html tidy at the brew version
-let g:syntastic_html_tidy_exec = '/usr/local/bin/tidy'
-let g:syntastic_html_tidy_blocklevel_tags = [
-\ 'alert',
-\ 'tabset',
-\ 'tab'
-\ ]
-let g:syntastic_html_tidy_inline_tags = [
-\ ]
-let g:syntastic_html_tidy_empty_tags = [
-\ ]
-let g:syntastic_html_tidy_ignore_errors = [
-\   ' proprietary attribute "ng-',
-\   ' proprietary attribute "ui-view',
-\   ' proprietary attribute "on',
-\   ' proprietary attribute "valid-json',
-\   '<div> proprietary attribute "src'
-\ ]
+"let g:syntastic_html_tidy_exec = '/usr/local/bin/tidy'
+"let g:syntastic_html_tidy_blocklevel_tags = [
+"\ 'alert',
+"\ 'tabset',
+"\ 'tab'
+"\ ]
+"let g:syntastic_html_tidy_inline_tags = [
+"\ ]
+"let g:syntastic_html_tidy_empty_tags = [
+"\ ]
+"let g:syntastic_html_tidy_ignore_errors = [
+"\   ' proprietary attribute "ng-',
+"\   ' proprietary attribute "ui-view',
+"\   ' proprietary attribute "on',
+"\   ' proprietary attribute "valid-json',
+"\   '<div> proprietary attribute "src'
+"\ ]
 
 function! FindRequire(name)
 	let l:first = 'process.stdout.write(require.resolve("'

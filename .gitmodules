@@ -79,3 +79,6 @@
 [submodule "ale"]
 	path = ale
 	url = https://github.com/dense-analysis/ale.git
+[submodule "vimfiles/bundle/ale"]
+	path = vimfiles/bundle/ale
+	url = https://github.com/dense-analysis/ale.git
